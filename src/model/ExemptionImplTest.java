@@ -59,17 +59,25 @@ class ExemptionImplTest
 	}
 
 	@Test
-	void authorityTest()
+	void authorityTest() //looks for appropriate exemption
 	{
 		assertEquals(true, a.isExemptionApproved());
 		assertEquals(false, b.isExemptionApproved());
 	}
 	
 	@Test
-	void printOutTest()
+	void printOutTest() //tests that the comment file is appropriately matched
 	{
 		a.addComment("This is a test");
-		System.out.println(a.readComments());
+		assertEquals("S3127736_Comments.txt", a.getCommentFileName());
+		
+	}
+	
+	@Test
+	void commentsContainTest() //looks for correct contents of comment printOut
+	{
+		String temp = "This subject line should match exactly what comes back in";
+		b.addComment(temp);
 	}
 
 }

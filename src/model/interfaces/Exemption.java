@@ -15,5 +15,9 @@ public interface Exemption
 	
 	@Override
 	public abstract String toString();
+
+	public boolean commentsAttached();
+
+	public String getCommentFileName();
 	
 }

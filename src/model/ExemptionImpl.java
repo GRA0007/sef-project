@@ -19,7 +19,7 @@ public class ExemptionImpl implements Exemption
 	private String staffID;
 	private String courseCode;
 	private boolean approvedExemption;
-	private boolean commentsExist;
+	private boolean commentsExist;	//allows user awareness if any comments have been attached
 	
 	private Date date;
 	private long time;
@@ -54,6 +54,7 @@ public class ExemptionImpl implements Exemption
 				e.printStackTrace();
 				} 
 
+			//This allows for comments to be tagged with appending staff member, and the date associated
 			pr.println(comments);
 			pr.println("Staff Member: " + this.staffID);
 			pr.println(timeStamp);
@@ -109,10 +110,22 @@ public class ExemptionImpl implements Exemption
 	}
 	
 	@Override
+	public boolean commentsAttached()
+	{
+		return this.commentsExist;
+	}
+	
+	@Override
 	public String exemptionDetails()
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String getCommentFileName()
+	{
+		return this.save.getName();
 	}
 
 /*	@Override
