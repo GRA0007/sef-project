@@ -2,8 +2,13 @@ package model.interfaces;
 
 public interface Exemption 
 {
+	/*
+	 * Variables
+	 *
+	 * List<Comment> comments
+	 */
 	
-	void addComment(String comments);
+	void addComment(String comment, int authority);
 	
 	String readComments();
 	
