@@ -5,7 +5,7 @@ public interface Exemption
 	
 	public abstract void addComment(String comments);
 	
-	public abstract void readComments();
+	public abstract String readComments();
 	
 	public abstract boolean isExemptionApproved();
 

@@ -19,13 +19,13 @@ public class ExemptionImpl implements Exemption
 	private String staffID;
 	private String courseCode;
 	private boolean approvedExemption;
-	private String comments;
+	private boolean commentsExist;
 	
 	private Date date;
 	private long time;
 	private Timestamp timeStamp;
 	
-	private File save = new File(this.studentID+"_"+"Comments.txt");
+	private File save;
 	
 	public ExemptionImpl(String studentID, String staffID, String courseCode, boolean approvedExemption)
 	{
@@ -40,6 +40,7 @@ public class ExemptionImpl implements Exemption
 	public void addComment(String comments) 
 	{				
 		PrintWriter pr = null;
+		save = new File(this.studentID+"_"+"Comments.txt");
 		
 		date = new Date();
 		time = date.getTime();
@@ -53,17 +54,22 @@ public class ExemptionImpl implements Exemption
 				e.printStackTrace();
 				} 
 
-			pr.print(comments);
-
+			pr.println(comments);
+			pr.println("Staff Member: " + this.staffID);
 			pr.println(timeStamp);
 								
 			pr.close();	
+			
+			this.commentsExist = true;
+			
+			
 	}
 	
 	@Override
-	public void readComments()
+	public String readComments()
 	{
 		String readInComment;
+		String finalString = "";
 		
 		try
 		{
@@ -71,9 +77,13 @@ public class ExemptionImpl implements Exemption
 			BufferedReader br = new BufferedReader(txt);
 	
 			while ((readInComment = br.readLine()) != null) 
-				    System.out.println(readInComment);
+			{
+				finalString += readInComment;
+				finalString += "\n";
+			}
 			
 			br.close();
+			return finalString;
 			
 		} catch (FileNotFoundException e)
 			{
@@ -82,7 +92,8 @@ public class ExemptionImpl implements Exemption
 			catch (IOException e)
 			{
 			e.printStackTrace();
-			} 	
+			}
+		return null; 
 	}
 	
 	@Override
