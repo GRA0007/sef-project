@@ -9,14 +9,14 @@ package model.interfaces;
  */
 public interface User {
 	
-	public abstract String getID();
+	String getID();
 	
-	public abstract String getName();
+	String getName();
 	
-	public abstract String getPhoneNO();
+	String getPhoneNO();
 	
-	public abstract String getAddress();
+	String getAddress();
 	
 	@Override
-	public abstract String toString();
+	String toString();
 }

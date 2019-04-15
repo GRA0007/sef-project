@@ -3,21 +3,18 @@ package model.interfaces;
 public interface Exemption 
 {
 	
-	public abstract void addComment(String comments);
+	void addComment(String comments);
 	
-	public abstract String readComments();
+	String readComments();
 	
-	public abstract boolean isExemptionApproved();
+	boolean isExemptionApproved();
 
-	public abstract void setApprovedExemption(boolean approvedExemption);
+	void setApprovedExemption(boolean approvedExemption);
 	
-	public abstract String exemptionDetails();
+	String exemptionDetails();
 	
 	@Override
-	public abstract String toString();
-
+	String toString();
 	public boolean commentsAttached();
-
 	public String getCommentFileName();
-	
 }
