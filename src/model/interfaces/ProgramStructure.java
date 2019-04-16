@@ -10,5 +10,4 @@ public interface ProgramStructure {
 
     void deleteExemption(Exemption exemption);
 
-    Exception[] getExemptions();
 }
