@@ -68,7 +68,7 @@ class ExemptionImplTest
 	@Test
 	void printOutTest()
 	{
-		a.addComment("This is a test");
+		//a.addComment("This is a test");
 		System.out.println(a.readComments());
 	}
 

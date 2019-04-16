@@ -35,7 +35,6 @@ public class StaffImpl extends AbstractUser implements Staff
 		return authority;
 	}
 
-	@Override
 	public void setAuthority(boolean enable)	//sets staff accessibility privileges
 	{
 		this.authority = enable;
@@ -54,4 +53,8 @@ public class StaffImpl extends AbstractUser implements Staff
 				this.staffTitle, this.authority ? "Approved" : "Not_Approved").toUpperCase();
 	}
 
+	@Override
+	public void setAuthority(int authority) {
+
+	}
 }

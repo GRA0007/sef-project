@@ -13,7 +13,7 @@ import model.interfaces.Exemption;
 import model.interfaces.Staff;
 import model.interfaces.Student;
 
-public class ExemptionImpl implements Exemption
+public  class ExemptionImpl implements Exemption
 {
 	private String studentID;
 	private String staffID;
@@ -124,4 +124,9 @@ public class ExemptionImpl implements Exemption
 				this.staff.getName(), this.courseCode, this.approvedExemption ? "Approved" : "Not Approved",
 						(this.comments != null ) ? "Comments Available":"No Comments");
 	}*/
+
+	@Override
+	public void addComment(String comment, int authority) {
+
+	}
 }

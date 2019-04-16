@@ -8,6 +8,7 @@ public interface Comment {
      * Staff author
      * Date date
      */
+
     @Override
     String toString();
 }

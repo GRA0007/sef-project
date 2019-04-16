@@ -1,5 +1,6 @@
 package model;
 
+import model.interfaces.Comment;
 import model.interfaces.Student;
 
 import java.util.HashMap;
@@ -25,4 +26,8 @@ public class StudentImpl extends AbstractUser implements Student
 				staffMember.authorityAccess()));
 	}
 
+    @Override
+    public void sendCommentEmail(Comment comment) {
+
+    }
 }
