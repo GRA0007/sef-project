@@ -1,0 +1,7 @@
+This subject line should match exactly what comes back in
+Student Number: 	S5677359
+Supervisor: 		E252879
+Course: 			ISYS5180
+Exemption status: 	Not Approved
+Comments: 			Comments Available
+2019-04-16 07:20:05.662

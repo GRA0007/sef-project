@@ -9,15 +9,14 @@ public interface Exemption
 	
 	public abstract boolean isExemptionApproved();
 
-	public abstract void setApprovedExemption(boolean approvedExemption);
+	boolean setApprovedExemption(int authority);
 	
 	public abstract String exemptionDetails();
 	
 	@Override
-	public abstract String toString();
-
-	public boolean commentsAttached();
-
-	public String getCommentFileName();
+	String toString();
 	
+	boolean commentsAttached();
+	
+	String getCommentFileName();
 }

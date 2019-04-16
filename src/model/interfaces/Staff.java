@@ -9,7 +9,7 @@ package model.interfaces;
  */
 public interface Staff extends User {
 
-	public abstract boolean authorityAccess();
+	int authorityAccess();
 
 	public abstract void setAuthority(boolean enable);
 

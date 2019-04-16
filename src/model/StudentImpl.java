@@ -1,5 +1,6 @@
 package model;
 
+import model.interfaces.Comment;
 import model.interfaces.Student;
 
 import java.util.HashMap;
@@ -21,8 +22,14 @@ public class StudentImpl extends AbstractUser implements Student
 	@Override
 	public void addStudentExemption(StaffImpl staffMember, String courseCode)
 	{	
-		studentExemptions.put(courseCode, new ExemptionImpl(this.userID, staffMember.userID, courseCode,
-				staffMember.authorityAccess()));
+		studentExemptions.put(courseCode, new ExemptionImpl(this.userID, staffMember.userID, courseCode, true));
+	}
+
+	@Override
+	public void sendCommentEmail(Comment comment)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -27,17 +27,19 @@ public class ExemptionImpl implements Exemption
 	
 	private File save;
 	
-	public ExemptionImpl(String studentID, String staffID, String courseCode, boolean approvedExemption)
+	public ExemptionImpl(String studentID, String staffID, String courseCode, int authority)
 	{
+		if(authority < 0 || authority > 3) {throw new IllegalArgumentException();}
+		
 		this.studentID = studentID;
 		this.staffID = staffID;
 		this.courseCode = courseCode;
-		this.approvedExemption = approvedExemption;
+		this.approvedExemption = setApprovedExemption(authority);
 
 	}
 	
-	//create comment class, for further separation
-	public void addComment(String comments) 
+	//these comments only refer to specifics involving description regarding the approval of exemption
+	public void addComment(String comments, int authority) 
 	{				
 		PrintWriter pr = null;
 		save = new File(this.studentID+"_"+"Comments.txt");
@@ -54,16 +56,14 @@ public class ExemptionImpl implements Exemption
 				e.printStackTrace();
 				} 
 
+			this.commentsExist = true;
+		
 			//This allows for comments to be tagged with appending staff member, and the date associated
 			pr.println(comments);
-			pr.println("Staff Member: " + this.staffID);
+			pr.println(toString());
 			pr.println(timeStamp);
 								
-			pr.close();	
-			
-			this.commentsExist = true;
-			
-			
+			pr.close();			
 	}
 	
 	@Override
@@ -104,9 +104,12 @@ public class ExemptionImpl implements Exemption
 	}
 
 	@Override
-	public void setApprovedExemption(boolean approvedExemption)
+	public boolean setApprovedExemption(int authority)
 	{
-		this.approvedExemption = approvedExemption;
+		if(authority == 3) {
+			return (this.approvedExemption = true);
+		}
+		else return (this.approvedExemption = false);
 	}
 	
 	@Override
@@ -128,13 +131,12 @@ public class ExemptionImpl implements Exemption
 		return this.save.getName();
 	}
 
-/*	@Override
+	@Override
 	public String toString() 
 	{
-		return String.format("Student Number: \t%s\nName: \t\t\t%s %s\nSupervisor: \t\t%s\nCourse: \t\t%s\n"
-				+ "Exemption status: \t%s\nComments: \t\t%s", 
-				this.student.getStudentID(), this.student.getGivenName(), this.student.getFamName(), 
-				this.staff.getName(), this.courseCode, this.approvedExemption ? "Approved" : "Not Approved",
-						(this.comments != null ) ? "Comments Available":"No Comments");
-	}*/
+		return String.format("Student Number: \t%s\nSupervisor: \t\t%s\nCourse: \t\t\t%s\n"
+				+ "Exemption status: \t%s\nComments: \t\t\t%s", 
+				this.studentID, this.staffID, this.courseCode, this.approvedExemption ? "Approved" : "Not Approved",
+						this.commentsExist ? "Comments Available":"No Comments");
+	}
 }
