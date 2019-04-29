@@ -22,7 +22,7 @@ public class StudentImpl extends AbstractUser implements Student
 	@Override
 	public void addStudentExemption(StaffImpl staffMember, String courseCode)
 	{	
-		studentExemptions.put(courseCode, new ExemptionImpl(this.userID, staffMember.userID, courseCode, true));
+		studentExemptions.put(courseCode, new ExemptionImpl(this.userID, staffMember.userID, courseCode, staffMember.authorityAccess()));
 	}
 
 	@Override

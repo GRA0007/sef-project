@@ -3,7 +3,7 @@ package model.interfaces;
 public interface Exemption 
 {
 	
-	public abstract void addComment(String comments);
+	public abstract void addComment(String comments, int authority);
 	
 	public abstract String readComments();
 	

@@ -11,7 +11,7 @@ public interface Staff extends User {
 
 	int authorityAccess();
 
-	public abstract void setAuthority(boolean enable);
+	public abstract void setAuthority(int authority);
 
 	public abstract String getDepartment();
 
