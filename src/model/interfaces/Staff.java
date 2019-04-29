@@ -9,10 +9,12 @@ package model.interfaces;
  */
 public interface Staff extends User {
 
-	boolean authorityAccess();
+	boolean hasAuthorityAccess();
 
 	void setAuthority(int authority);
 
 	String getDepartment();
+
+	int authorityAccessLevel();
 
 }

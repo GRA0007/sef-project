@@ -37,7 +37,7 @@ public class ExemptionImpl implements Exemption
 	}
 	
 	//create comment class, for further separation
-	public void addComment(String comments) 
+	public void addComment(String comments, int authority) 
 	{				
 		PrintWriter pr = null;
 		save = new File(this.studentID+"_"+"Comments.txt");
