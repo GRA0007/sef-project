@@ -1,17 +1,17 @@
 package model;
 
-import model.interfaces.Comment;
-import model.interfaces.Structure;
+import model.interfaces.CommentInt;
+import model.interfaces.StructureInt;
 
 import java.util.Date;
 
-public abstract class AbstractStructure implements Structure {
+public abstract class AbstractStructure implements StructureInt {
 
     public abstract String toString();
 
     public abstract String getDuration();
 
-    public void addComment(Comment comment){
+    public void addComment(CommentInt comment){
 
     }
 
@@ -21,7 +21,7 @@ public abstract class AbstractStructure implements Structure {
        return null;
     }
 
-    public  String getComments(StaffImpl staff){
+    public  String getComments(Staff staff){
         return null;
     }
     public  String getComments(Date dateTime){

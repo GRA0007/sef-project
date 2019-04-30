@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public  class ExemptionImpl implements Exemption
+public  class Exemption
 {
 	private String studentID;
 	private String staffID;
@@ -23,7 +23,7 @@ public  class ExemptionImpl implements Exemption
 	
 	private File save;
 	
-	public ExemptionImpl(String studentID, String staffID, String courseCode, boolean approvedExemption)
+	public Exemption(String studentID, String staffID, String courseCode, boolean approvedExemption)
 	{
 		this.studentID = studentID;
 		this.staffID = staffID;
@@ -61,7 +61,6 @@ public  class ExemptionImpl implements Exemption
 			
 	}
 	
-	@Override
 	public String readComments()
 	{
 		String readInComment;
@@ -92,19 +91,16 @@ public  class ExemptionImpl implements Exemption
 		return null; 
 	}
 	
-	@Override
 	public boolean isExemptionApproved()
 	{
 		return approvedExemption;
 	}
 
-	@Override
 	public void setApprovedExemption(boolean approvedExemption)
 	{
 		this.approvedExemption = approvedExemption;
 	}
 	
-	@Override
 	public String exemptionDetails()
 	{
 		// TODO Auto-generated method stub
@@ -121,7 +117,6 @@ public  class ExemptionImpl implements Exemption
 						(this.comments != null ) ? "Comments Available":"No Comments");
 	}*/
 
-	@Override
 	public void addComment(String comment, int authority) {
 
 	}

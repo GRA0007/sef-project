@@ -1,9 +1,8 @@
 package model.interfaces;
 
-public interface Comment {
+public interface CommentInt {
     /* Variables
      *
-     * int authority
      * String comment
      * Staff author
      * Date date

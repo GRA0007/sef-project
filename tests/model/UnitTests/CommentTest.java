@@ -1,6 +1,6 @@
 package model.UnitTests;
 
-import model.CommentImpl;
+import model.Comment;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,9 +10,9 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-public class CommentImplTest {
+public class CommentTest {
 
-    CommentImpl comment1;
+    Comment comment1;
     Date currentDate = new Date( );
     int authority  = 1;
     String comment  = "This is a dummaz comment to test the bloody testing class";
@@ -28,7 +28,7 @@ public class CommentImplTest {
         SimpleDateFormat ft =
                 new SimpleDateFormat ("yyyy.MM.dd");
 
-        comment1 = new CommentImpl(authority ,comment,author, currentDate);
+        comment1 = new Comment(comment,author, currentDate);
     }
 
     @After

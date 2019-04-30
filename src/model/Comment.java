@@ -1,9 +1,9 @@
 package model;
-import model.interfaces.Comment;
+import model.interfaces.CommentInt;
 
 import java.util.Date;
 
-public class CommentImpl implements Comment
+public class Comment implements CommentInt
 {
 
     private int authority;
@@ -14,7 +14,7 @@ public class CommentImpl implements Comment
     private Date date ;
 
     //Instatiate the authority, comment, author, date
-    public CommentImpl(String comment, String author, Date date){
+    public Comment(String comment, String author, Date date){
         this.comment = comment;
         this.author = author;
         this.date = date;
@@ -66,7 +66,7 @@ public class CommentImpl implements Comment
 
        toString = String.format("%s\n%-30s%s", toString, "Date:", this.date);
        toString = String.format("%s\n%-30s%s", toString, "Author:", this.author);
-       toString = String.format("%s\n%-30s%s", toString, "Comment:", this.comment);
+       toString = String.format("%s\n%-30s%s", toString, "CommentInt:", this.comment);
        toString = String.format("%s\n%-30s%s", toString, "Allow access to:", actualAuthority);
 
 

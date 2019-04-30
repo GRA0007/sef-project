@@ -2,16 +2,16 @@ package model;
 
 import java.util.StringTokenizer;
 
-import model.interfaces.User;
+import model.interfaces.UserInt;
 
 
 
 /**
  * @author andy
- *	The abstract user will be an overall template for both StaffImpl and StudentImpl, it is not yet decided if 
+ *	The abstract user will be an overall template for both Staff and Student, it is not yet decided if
  *	variable setting will be appropriate, that will be latter confirmed.
  */
-public abstract class AbstractUser implements User
+public abstract class AbstractUser implements UserInt
 {
 		protected String userID;
 		protected String famName;

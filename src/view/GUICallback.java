@@ -1,9 +1,6 @@
-package view.interfaces;
+package view;
 
-// Callback for the GUI interface
-
-public interface GUICallback {
-
+public class GUICallback {
     //write the menu
     //Integrate with the other classes
 
@@ -90,5 +87,4 @@ public interface GUICallback {
             * Authority should be applied here for editing
 
      */
-
 }

@@ -12,7 +12,7 @@ public class Course extends AbstractStructure {
     }
 
     @Override
-    public String getComments(StaffImpl staff) {
+    public String getComments(Staff staff) {
         return null;
     }
 }

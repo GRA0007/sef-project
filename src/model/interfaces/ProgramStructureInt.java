@@ -1,6 +1,6 @@
 package model.interfaces;
 
-public interface ProgramStructure {
+public interface ProgramStructureInt {
     /*
      * Variables:
      * Name
@@ -8,10 +8,10 @@ public interface ProgramStructure {
      * List<Exemption> exemptions
      */
 
-    void addStructure(Structure structure);
-    Structure setStructure(Structure structure);
-    Structure getStructure(int listNumber);
-    void deleteStructure(Structure structure);
+    void addStructure(StructureInt structure);
+    StructureInt setStructure(StructureInt structure);
+    StructureInt getStructure(int listNumber);
+    void deleteStructure(StructureInt structure);
 
     //create hash map here for comparisons
     //hashmap is deleted for each time toString is called
