@@ -9,10 +9,6 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import model.interfaces.Exemption;
-import model.interfaces.Staff;
-import model.interfaces.Student;
-
 public  class ExemptionImpl implements Exemption
 {
 	private String studentID;

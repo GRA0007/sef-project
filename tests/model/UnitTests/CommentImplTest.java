@@ -1,16 +1,12 @@
 package model.UnitTests;
 
 import model.CommentImpl;
-import model.StaffImpl;
-import model.interfaces.Comment;
-import model.interfaces.Staff;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +19,9 @@ public class CommentImplTest {
     String author = "Milroy da sokk";
 
     public static void main(String[] args){
+
     }
+
     @Before
     public void setUp() throws Exception {
 
@@ -43,6 +41,7 @@ public class CommentImplTest {
         String authName = "Not milroy";
         comment1.setAuthor(authName);
         assertEquals(authName, comment1.getAuthor());
+        System.out.println("\nNew auth name: " + comment1.getAuthor());
     }
 
     @Test

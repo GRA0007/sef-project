@@ -1,8 +1,6 @@
 package model;
 import model.interfaces.Comment;
-import model.interfaces.Staff;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CommentImpl implements Comment
@@ -16,15 +14,10 @@ public class CommentImpl implements Comment
     private Date date ;
 
     //Instatiate the authority, comment, author, date
-    public CommentImpl(int authority, String comment, String author, Date date){
-        this.authority = authority;
+    public CommentImpl(String comment, String author, Date date){
         this.comment = comment;
         this.author = author;
         this.date = date;
-    }
-
-    public void setAuthority(int authority){
-        this.authority = authority;
     }
 
     public void setComment(String comment){
@@ -71,9 +64,9 @@ public class CommentImpl implements Comment
        String toString = "";
        toString = String.format("%s\n%s", toString, "Here's the comment you wanted to access!");
 
-       toString = String.format("%s\n%-30s%s", toString, "Date:", this.getDate());
-       toString = String.format("%s\n%-30s%s", toString, "Author:", this.getAuthor());
-       toString = String.format("%s\n%-30s%s", toString, "Comment:", this.getComment());
+       toString = String.format("%s\n%-30s%s", toString, "Date:", this.date);
+       toString = String.format("%s\n%-30s%s", toString, "Author:", this.author);
+       toString = String.format("%s\n%-30s%s", toString, "Comment:", this.comment);
        toString = String.format("%s\n%-30s%s", toString, "Allow access to:", actualAuthority);
 
 

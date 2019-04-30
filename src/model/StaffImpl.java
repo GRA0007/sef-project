@@ -1,7 +1,5 @@
 package model;
 
-import model.interfaces.Staff;
-
 public class StaffImpl extends AbstractUser implements Staff
 {
 

@@ -1,17 +1,10 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import model.interfaces.Exemption;
-import model.interfaces.Staff;
-import model.interfaces.Student;
-
 
 
 class ExemptionImplTest

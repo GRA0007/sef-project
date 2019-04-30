@@ -1,12 +1,9 @@
 package model;
 
 import model.interfaces.Comment;
-import model.interfaces.Student;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import model.StaffImpl;
 
 public class StudentImpl extends AbstractUser implements Student
 {

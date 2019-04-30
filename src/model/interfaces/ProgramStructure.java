@@ -2,13 +2,20 @@ package model.interfaces;
 
 public interface ProgramStructure {
     /*
-     * Variables
+     * Variables:
+     * Name
      *
      * List<Exemption> exemptions
      */
-    void addExemption(Exemption exemption);
 
-    void deleteExemption(Exemption exemption);
+    void addStructure(Structure structure);
+    Structure setStructure(Structure structure);
+    Structure getStructure(int listNumber);
+    void deleteStructure(Structure structure);
 
-    Exception[] getExemptions();
+    //create hash map here for comparisons
+    //hashmap is deleted for each time toString is called
+    String toString();
+    String toString (int filter);
+
 }
