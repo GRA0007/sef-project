@@ -9,11 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import model.interfaces.Exemption;
-import model.interfaces.Staff;
-import model.interfaces.Student;
-
-public class ExemptionImpl implements Exemption
+public  class Exemption
 {
 	private String studentID;
 	private String staffID;
@@ -27,7 +23,7 @@ public class ExemptionImpl implements Exemption
 	
 	private File save;
 	
-	public ExemptionImpl(String studentID, String staffID, String courseCode, boolean approvedExemption)
+	public Exemption(String studentID, String staffID, String courseCode, boolean approvedExemption)
 	{
 		this.studentID = studentID;
 		this.staffID = staffID;
@@ -66,7 +62,6 @@ public class ExemptionImpl implements Exemption
 			
 	}
 	
-	@Override
 	public String readComments()
 	{
 		String readInComment;
@@ -97,18 +92,17 @@ public class ExemptionImpl implements Exemption
 		return null; 
 	}
 	
-	@Override
 	public boolean isExemptionApproved()
 	{
 		return approvedExemption;
 	}
 
-	@Override
 	public void setApprovedExemption(boolean approvedExemption)
 	{
 		this.approvedExemption = approvedExemption;
 	}
 	
+<<<<<<< HEAD:src/model/ExemptionImpl.java
 	@Override
 	public boolean commentsAttached()
 	{
@@ -116,6 +110,8 @@ public class ExemptionImpl implements Exemption
 	}
 	
 	@Override
+=======
+>>>>>>> master:src/model/Exemption.java
 	public String exemptionDetails()
 	{
 		// TODO Auto-generated method stub
@@ -137,4 +133,8 @@ public class ExemptionImpl implements Exemption
 				this.staff.getName(), this.courseCode, this.approvedExemption ? "Approved" : "Not Approved",
 						(this.comments != null ) ? "Comments Available":"No Comments");
 	}*/
+
+	public void addComment(String comment, int authority) {
+
+	}
 }

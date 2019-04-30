@@ -1,8 +1,6 @@
 package model;
 
-import model.interfaces.Staff;
-
-public class StaffImpl extends AbstractUser implements Staff
+public class Staff extends AbstractUser
 {
 
 	private String department;
@@ -10,9 +8,17 @@ public class StaffImpl extends AbstractUser implements Staff
 
 	private String staffTitle; // At the moment this serves as a label for for staff's position title
 								// for example, Course Coordinator or Program Manager
+<<<<<<< HEAD:src/model/StaffImpl.java
 
 	public StaffImpl(String userID, String famName, String givenName, String address, String phoneNo, String email,
 			String department, String staffTitle, int authority)
+=======
+	
+	
+	public Staff(String userID, String famName, String givenName, String address,
+                 String phoneNo, String email,
+                 String department, String staffTitle, boolean authority)
+>>>>>>> master:src/model/Staff.java
 	{
 		super(userID, famName, givenName, address, phoneNo, email);
 
@@ -27,8 +33,12 @@ public class StaffImpl extends AbstractUser implements Staff
 		return this.userID;
 	}
 
+<<<<<<< HEAD:src/model/StaffImpl.java
 	@Override
 	public int authorityAccessLevel() // retrieves if the staff member has authority to access sensitive details
+=======
+	public boolean authorityAccess()	//retrieves if the staff member has authority to access sensitive details
+>>>>>>> master:src/model/Staff.java
 	{
 		return authority;
 	}
@@ -39,13 +49,16 @@ public class StaffImpl extends AbstractUser implements Staff
 		return authority == 3 ? true : false;
 	}
 
+<<<<<<< HEAD:src/model/StaffImpl.java
 	@Override
 	public void setAuthority(int authority) // sets staff accessibility privileges
+=======
+	public void setAuthority(boolean enable)	//sets staff accessibility privileges
+>>>>>>> master:src/model/Staff.java
 	{
 		this.authority = authority;
 	}
 
-	@Override
 	public String getDepartment()
 	{
 		return department;
@@ -58,4 +71,7 @@ public class StaffImpl extends AbstractUser implements Staff
 				+ String.format(":%s:%s:%s", this.department, this.staffTitle, this.authority).toUpperCase();
 	}
 
+	public void setAuthority(int authority) {
+
+	}
 }
