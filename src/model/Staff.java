@@ -1,8 +1,6 @@
 package model;
 
-import model.interfaces.Staff;
-
-public class StaffImpl extends AbstractUser implements Staff
+public class Staff extends AbstractUser
 {
 
 	private String department;
@@ -12,9 +10,9 @@ public class StaffImpl extends AbstractUser implements Staff
 								// for example, Course Coordinator or Program Manager
 	
 	
-	public StaffImpl(String userID, String famName, String givenName, String address, 
-			String phoneNo, String email,
-			String department, String staffTitle, boolean authority)
+	public Staff(String userID, String famName, String givenName, String address,
+                 String phoneNo, String email,
+                 String department, String staffTitle, boolean authority)
 	{
 		super(userID, famName, givenName, address, phoneNo, email);
 		
@@ -29,19 +27,16 @@ public class StaffImpl extends AbstractUser implements Staff
 		return this.userID;
 	}
 
-	@Override
 	public boolean authorityAccess()	//retrieves if the staff member has authority to access sensitive details
 	{
 		return authority;
 	}
 
-	@Override
 	public void setAuthority(boolean enable)	//sets staff accessibility privileges
 	{
 		this.authority = enable;
 	}
 
-	@Override
 	public String getDepartment()
 	{
 		return department;
@@ -54,4 +49,7 @@ public class StaffImpl extends AbstractUser implements Staff
 				this.staffTitle, this.authority ? "Approved" : "Not_Approved").toUpperCase();
 	}
 
+	public void setAuthority(int authority) {
+
+	}
 }

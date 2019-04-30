@@ -7,7 +7,7 @@ package model.interfaces;
  * 
  * Bellow are basic accessor methods.
  */
-public interface User {
+public interface UserInt {
 	
 	String getID();
 	

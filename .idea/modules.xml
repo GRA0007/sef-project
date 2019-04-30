@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sef-project.iml" filepath="$PROJECT_DIR$/sef-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SEF_Project.iml" filepath="$PROJECT_DIR$/SEF_Project.iml" />
     </modules>
   </component>
 </project>
