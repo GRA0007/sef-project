@@ -5,9 +5,14 @@ import model.interfaces.StructureInt;
 
 import java.util.Date;
 
-public abstract class AbstractStructure implements StructureInt {
+public abstract class AbstractStructure implements StructureInt{
 
-    public abstract String toString();
+	protected Student student;
+	
+	public AbstractStructure(Student student)
+	{
+		this.student = student;
+	}
 
     public abstract String getDuration();
 
@@ -27,5 +32,13 @@ public abstract class AbstractStructure implements StructureInt {
     public  String getComments(Date dateTime){
        return null;
     }
+    
+    @Override
+    public String toString() {
+    	
+    	return String.format("Student ID:\t\t%s\nStudent Name:\t\t%s\n",
+    			student.getID(), student.getName());
+    	
+    };
 
 }

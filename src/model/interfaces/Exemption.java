@@ -1,25 +1,30 @@
 package model.interfaces;
 
-public interface Exemption 
+import java.time.LocalDate;
+
+public interface Exemption
 {
 	/*
 	 * Variables
 	 *
 	 * List<Comment> comments
 	 */
-	
-	void addComment(String comment, int authority);
-	
-	String readComments();
-	
+
 	boolean isExemptionApproved();
 
-	void setApprovedExemption(boolean approvedExemption);
-	
-	String exemptionDetails();
-	
+	void setApprovedExemption(boolean isExemptionApproved);
+
+	LocalDate getChallengeExamDate();
+
+	void setChallengeExamDate(LocalDate challengeExamDate);
+
+	String getExemptionRequest();
+
 	@Override
 	String toString();
-	public boolean commentsAttached();
-	public String getCommentFileName();
+
+	void addComment(String comment);
+
+	String readComments();
+
 }

@@ -2,7 +2,13 @@ package model;
 
 public class Course extends AbstractStructure {
 
-    public String toString(){
+    public Course(Student student)
+	{
+		super(student);
+		// TODO Auto-generated constructor stub
+	}
+
+	public String toString(){
         return null;
     }
 

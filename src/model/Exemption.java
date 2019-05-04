@@ -6,135 +6,141 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 
-public  class Exemption
+public class Exemption extends AbstractStructure implements model.interfaces.Exemption
 {
-	private String studentID;
-	private String staffID;
-	private String courseCode;
-	private boolean approvedExemption;
-	private boolean commentsExist;	//allows user awareness if any comments have been attached
+	private boolean exemptionDecision; //has staff member approved exemption, can be decided post creation
+	private Staff staff;
 	
-	private Date date;
-	private long time;
-	private Timestamp timeStamp;
+	private String dateRequested; //timestamp of creation
+	private String exemptionRequest; //what course is requested for exemption
+	private LocalDate challengeExamDate; //proposed new date for retake exam 
+	private String decision;
 	
+
 	private File save;
-	
-	public Exemption(String studentID, String staffID, String courseCode, boolean approvedExemption)
+
+	public Exemption(Student student, Staff staff, String exemptionRequest, LocalDate challengeExamDate, String decision)
 	{
-		this.studentID = studentID;
-		this.staffID = staffID;
-		this.courseCode = courseCode;
-		this.approvedExemption = approvedExemption;
+		super(student);
+		this.staff = staff;
+		
+		this.dateRequested = new AppendTimestamp().getTimestamp().toString();
+		this.exemptionRequest = exemptionRequest;
+		this.challengeExamDate = challengeExamDate;
+		this.decision = decision;
 
 	}
-	
-	//create comment class, for further separation
-	public void addComment(String comments, int authority) 
-	{				
-		PrintWriter pr = null;
-		save = new File(this.studentID+"_"+"Comments.txt");
-		
-		date = new Date();
-		time = date.getTime();
-		timeStamp = new Timestamp(time);
-		
-		try {
-			pr = new PrintWriter(save);
-			
-			} catch (FileNotFoundException e) 
-				{
-				e.printStackTrace();
-				} 
 
-			//This allows for comments to be tagged with appending staff member, and the date associated
-			pr.println(comments);
-			pr.println("Staff Member: " + this.staffID);
-			pr.println(timeStamp);
-								
-			pr.close();	
-			
-			this.commentsExist = true;
-			
-			
-	}
-	
-	public String readComments()
+	public String getDecision()
 	{
-		String readInComment;
-		String finalString = "";
-		
-		try
-		{
-			FileReader txt = new FileReader(save);
-			BufferedReader br = new BufferedReader(txt);
-	
-			while ((readInComment = br.readLine()) != null) 
-			{
-				finalString += readInComment;
-				finalString += "\n";
-			}
-			
-			br.close();
-			return finalString;
-			
-		} catch (FileNotFoundException e)
-			{
-			e.printStackTrace();
-			}
-			catch (IOException e)
-			{
-			e.printStackTrace();
-			}
-		return null; 
+		return decision;
 	}
-	
+
+	@Override
+	public LocalDate getChallengeExamDate()
+	{
+		return challengeExamDate;
+	}
+
+	@Override
+	public void setChallengeExamDate(LocalDate challengeExamDate)
+	{
+		this.challengeExamDate = challengeExamDate;
+	}
+
+	@Override
+	public String getExemptionRequest()
+	{
+		return exemptionRequest;
+	}
+
+	@Override
 	public boolean isExemptionApproved()
 	{
-		return approvedExemption;
+		return exemptionDecision;
 	}
 
+	@Override
 	public void setApprovedExemption(boolean approvedExemption)
 	{
-		this.approvedExemption = approvedExemption;
+		this.exemptionDecision = approvedExemption;
 	}
-	
-<<<<<<< HEAD:src/model/ExemptionImpl.java
-	@Override
-	public boolean commentsAttached()
+
+	public String getDateRequested()
 	{
-		return this.commentsExist;
+		return dateRequested;
 	}
-	
+
 	@Override
-=======
->>>>>>> master:src/model/Exemption.java
-	public String exemptionDetails()
+	public String getDuration()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	@Override
-	public String getCommentFileName()
+	public String toString()
 	{
-		return this.save.getName();
+		return super.toString() + "\n" + String.format("Date:\t\t\t%s\nExemption Sought:\t%s\nChallenge Exam Date\t%s\n"
+				+ "Decision Made:\t\t%s\nReason:\n%s", this.dateRequested, this.exemptionRequest, 
+				this.challengeExamDate,	this.exemptionDecision ? "Approved" : "Denied", this.decision);
 	}
+	
+	// create comment class, for further separation
+		@Override
+		public void addComment(String comment)
+		{
+			PrintWriter pr = null;
+			save = new File(student.userID + "_" + "Comments.txt");
 
-/*	@Override
-	public String toString() 
-	{
-		return String.format("Student Number: \t%s\nName: \t\t\t%s %s\nSupervisor: \t\t%s\nCourse: \t\t%s\n"
-				+ "Exemption status: \t%s\nComments: \t\t%s", 
-				this.student.getStudentID(), this.student.getGivenName(), this.student.getFamName(), 
-				this.staff.getName(), this.courseCode, this.approvedExemption ? "Approved" : "Not Approved",
-						(this.comments != null ) ? "Comments Available":"No Comments");
-	}*/
+			try
+			{
+				pr = new PrintWriter(save);
 
-	public void addComment(String comment, int authority) {
+			} catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
 
-	}
+			// This allows for comments to be tagged with appending staff member, and the
+			// date associated
+			pr.println(comment);
+			pr.println("Staff Member: " + staff.userID);
+			pr.println(new AppendTimestamp().getTimestamp());
+
+			pr.close();
+		}
+
+		@Override
+		public String readComments()
+		{
+			String readInComment;
+			String finalString = "";
+
+			try
+			{
+				FileReader txt = new FileReader(save);
+				BufferedReader br = new BufferedReader(txt);
+
+				while ((readInComment = br.readLine()) != null)
+				{
+					finalString += readInComment;
+					finalString += "\n";
+				}
+
+				br.close();
+				return finalString;
+
+			} catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			return null;
+		}
+
 }

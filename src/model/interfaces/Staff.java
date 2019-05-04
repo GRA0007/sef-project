@@ -7,14 +7,11 @@ package model.interfaces;
  *	This interface is for staff specifics only, it allows more incorporation of access privileges when staff 
  *	interacts with course exemption status and program structure 
  */
-public interface Staff extends User {
+public interface Staff {
 
 	boolean hasAuthorityAccess();
 
-	void setAuthority(int authority);
+	void setAuthority(boolean authority);
 
 	String getDepartment();
-
-	int authorityAccessLevel();
-
 }

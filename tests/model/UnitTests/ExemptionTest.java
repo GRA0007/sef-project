@@ -1,10 +1,15 @@
-package model;
+package model.UnitTests;
 
 import java.io.File;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import model.Staff;
+import model.Student;
+import model.Exemption;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,20 +32,7 @@ class ExemptionTest
 	Student s4 = new Student("s2156883", "Boyer", "Billie-Jo",
 			"86 Charles Street Collingwood VIC", "0443389756", "s2156883@student.rmit.edu.au");
 	
-<<<<<<< HEAD:src/model/ExemptionImplTest.java
-	Staff sf1 =  new StaffImpl("e259604", "Thevathayan","Charles", "City campus Building 15 Level 10 room 12",
-			"+61399259604", "charles.thevathayan@rmit.edu.au", "School of Science", "Course Coordinator", 2);
-	Staff sf2 =  new StaffImpl("e252879", "Khalil","Ibrahim", "14.11.25",
-			"+61399252879", "Ibrahim.khalil@rmit.edu.au ", "School of Science", "Course Coordinator", 2);	
-	Staff sf3 =  new StaffImpl("e120905", "Zhang","Xiuzhen", "14.09.05",
-			null, "xiuzhen.zhang@rmit.edu.au ", "School of Science", "Course Coordinator", 2);
-	Staff sf4 =  new StaffImpl("e259775", "Ryan","Caspar", "14.11.32",
-			"+61399259775", "caspar.ryan@rmit.edu.au", "School of Science", "Course Coordinator", 2);
-	Staff sf5 =  new StaffImpl("e333333", "Salim","Flora", null,
-			null, "flora.salim@rmit.edu.au", "School of Science", "Course Coordinator", 2);
-	Staff sf6 = new StaffImpl("e777777", "Balbin","Isaac", "Building 12 Level 9 Room 38",
-			null, "isaac.balbin@rmit.edu.au", "School of Science", "Program Manager", 3);
-=======
+
 	Staff sf1 =  new Staff("e259604", "Thevathayan","Charles", "City campus Building 15 Level 10 room 12",
 			"+61399259604", "charles.thevathayan@rmit.edu.au", "School of Science", "Course Coordinator", true);
 	Staff sf2 =  new Staff("e252879", "Khalil","Ibrahim", "14.11.25",
@@ -53,18 +45,14 @@ class ExemptionTest
 			null, "flora.salim@rmit.edu.au", "School of Science", "Course Coordinator", true);
 	Staff sf6 = new Staff("e777777", "Balbin","Isaac", "Building 12 Level 9 Room 38",
 			null, "isaac.balbin@rmit.edu.au", "School of Science", "Program Manager", true);
->>>>>>> master:src/model/ExemptionTest.java
+
 
 	@BeforeEach
 	void setUp() throws Exception
 	{
-<<<<<<< HEAD:src/model/ExemptionImplTest.java
-		a = new ExemptionImpl(s1.getID(), sf1.getID(), "ISYS5180", sf1.hasAuthorityAccess());
-		b = new ExemptionImpl(s2.getID(), sf2.getID(), "ISYS5180", sf2.hasAuthorityAccess());
-=======
-		a = new Exemption(s1.getID(), sf1.getID(), "ISYS5180", sf1.authorityAccess());
-		b = new Exemption(s2.getID(), sf2.getID(), "ISYS5180", sf2.authorityAccess());
->>>>>>> master:src/model/ExemptionTest.java
+		a = new Exemption(s1, sf1, "Redo Progamming Exam", LocalDate.of(2019, 10, 27), "Not Yet Approved");
+		b = new Exemption(s2, sf2, "Drop Security", LocalDate.of(2019, 05, 03), "Approved");
+
 	}
 
 	@AfterEach
@@ -83,9 +71,8 @@ class ExemptionTest
 	@Test
 	void printOutTest() //tests that the comment file is appropriately matched
 	{
-<<<<<<< HEAD:src/model/ExemptionImplTest.java
-		a.addComment("This is a test", sf1.authorityAccessLevel());
-		assertEquals("S3127736_Comments.txt", a.getCommentFileName());
+		a.addComment("This is a test");
+		System.out.println(a.toString());
 		
 	}
 	
@@ -93,11 +80,11 @@ class ExemptionTest
 	void commentsContainTest() //looks for correct contents of comment printOut
 	{
 		String temp = "This subject line should match exactly what comes back in";
-		b.addComment(temp, sf2.authorityAccessLevel());
-=======
+		b.addComment(temp);
+
 		//a.addComment("This is a test");
 		System.out.println(a.readComments());
->>>>>>> master:src/model/ExemptionTest.java
+
 	}
 
 }
