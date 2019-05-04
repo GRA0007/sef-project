@@ -1,17 +1,18 @@
 package model.interfaces;
 
+import model.AbstractStructure;
+
 public interface ProgramStructureInt {
     /*
      * Variables:
      * Name
      *
-     * List<Exemption> exemptions
+     * List<Exemption> structures
      */
 
-    void addStructure(StructureInt structure);
-    StructureInt setStructure(StructureInt structure);
+    void addStructure(AbstractStructure structure);
     StructureInt getStructure(int listNumber);
-    void deleteStructure(StructureInt structure);
+    void deleteStructure(AbstractStructure structure);
 
     //create hash map here for comparisons
     //hashmap is deleted for each time toString is called

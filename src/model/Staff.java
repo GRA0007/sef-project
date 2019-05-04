@@ -20,12 +20,6 @@ public class Staff extends AbstractUser
 		this.staffTitle = getFormattedString(staffTitle);
 		this.authority = authority;	
 	}
-	
-	@Override
-	public String getID()
-	{
-		return this.userID;
-	}
 
 	public boolean authorityAccess()	//retrieves if the staff member has authority to access sensitive details
 	{

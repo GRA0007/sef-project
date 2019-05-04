@@ -6,15 +6,18 @@ import java.util.Date;
 public class Comment implements CommentInt
 {
 
-    private int authority;
     private String comment;
-    //make staff name string for now
-    private String author;
+    private Staff author;
+    private Date date;
 
-    private Date date ;
+    // Instantiate the comment, author, date
+    public Comment(String comment, Staff author) {
+        this.comment = comment;
+        this.author = author;
+        this.date = new Date();
+    }
 
-    //Instatiate the authority, comment, author, date
-    public Comment(String comment, String author, Date date){
+    public Comment(String comment, Staff author, Date date) {
         this.comment = comment;
         this.author = author;
         this.date = date;
@@ -24,7 +27,7 @@ public class Comment implements CommentInt
         this.comment = comment;
     }
 
-    public void setAuthor(String author){
+    public void setAuthor(Staff author){
         this.author = author;
     }
 
@@ -32,15 +35,11 @@ public class Comment implements CommentInt
         this.date = date;
     }
 
-    public int getAuthority(){
-        return this.authority;
-    }
-
     public String getComment(){
         return this.comment;
     }
 
-    public String getAuthor(){
+    public Staff getAuthor(){
        return this.author;
     }
 
@@ -51,24 +50,10 @@ public class Comment implements CommentInt
 
     @Override
     public String toString() {
-
-        String actualAuthority = "";
-        if(this.getAuthority() == 1) {
-            actualAuthority = "Senior Program managers";
-        }
-        else if (this.getAuthority() == 2) {
-            actualAuthority = "Program managers";
-        }else{
-            actualAuthority = "Staff";
-        }
-       String toString = "";
-       toString = String.format("%s\n%s", toString, "Here's the comment you wanted to access!");
-
-       toString = String.format("%s\n%-30s%s", toString, "Date:", this.date);
-       toString = String.format("%s\n%-30s%s", toString, "Author:", this.author);
-       toString = String.format("%s\n%-30s%s", toString, "CommentInt:", this.comment);
-       toString = String.format("%s\n%-30s%s", toString, "Allow access to:", actualAuthority);
-
+        String toString = "";
+        toString = String.format("%s\n%-30s%s", toString, "Date:", this.date.toString());
+        toString = String.format("%s\n%-30s%s", toString, "Author:", this.author.getName());
+        toString = String.format("%s\n%-30s%s", toString, "Comment:", this.comment);
 
         return toString;
     }
