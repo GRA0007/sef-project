@@ -20,12 +20,6 @@ public class Staff extends AbstractUser implements model.interfaces.Staff
 		this.authority = authority;
 	}
 
-	@Override
-	public String getID()
-	{
-		return this.userID;
-	}
-
 	
 	@Override
 	public boolean hasAuthorityAccess()
