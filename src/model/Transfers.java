@@ -38,12 +38,6 @@ public class Transfers extends AbstractStructure
 		return adviceGiven;
 	}
 
-	public Transfers(Student student)
-	{
-		super(student);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString()
 	{

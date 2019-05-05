@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramStructure implements ProgramStructureInt {
-    private String name;
-    private List<AbstractStructure> structures = new ArrayList<>();
+
+	private List<AbstractStructure> structures = new ArrayList<>();
 
     public void addStructure(AbstractStructure structure) {
         structures.add(structure);
