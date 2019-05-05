@@ -93,7 +93,7 @@ public class Exemption extends AbstractStructure implements model.interfaces.Exe
 		public void addComment(String comment)
 		{
 			PrintWriter pr = null;
-			save = new File(student.userID + "_" + "Comments.txt");
+			save = new File(student.getID() + "_" + "Comments.txt");
 
 			try
 			{
@@ -107,7 +107,7 @@ public class Exemption extends AbstractStructure implements model.interfaces.Exe
 			// This allows for comments to be tagged with appending staff member, and the
 			// date associated
 			pr.println(comment);
-			pr.println("Staff Member: " + staff.userID);
+			pr.println("Staff Member: " + staff.getID());
 			pr.println(new AppendTimestamp().getTimestamp());
 
 			pr.close();
