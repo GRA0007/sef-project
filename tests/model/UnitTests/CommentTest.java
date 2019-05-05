@@ -1,6 +1,7 @@
 package model.UnitTests;
 
 import model.Comment;
+import model.Staff;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class CommentTest {
     Date currentDate = new Date( );
     int authority  = 1;
     String comment  = "This is a dummaz comment to test the bloody testing class";
-    String author = "Milroy da sokk";
+    Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", false);
 
     public static void main(String[] args){
 
@@ -37,21 +38,15 @@ public class CommentTest {
 
     @Test
     public void editAuthor() {
-
-        String authName = "Not milroy";
-        comment1.setAuthor(authName);
-        assertEquals(authName, comment1.getAuthor());
+        Staff notMilroy = new Staff("e1234","Not","Milroy", "", "", "", "", "", false);
+        comment1.setAuthor(notMilroy);
+        assertEquals(notMilroy, comment1.getAuthor());
         System.out.println("\nNew auth name: " + comment1.getAuthor());
     }
 
     @Test
     public void getAuthor() {
         assertEquals(author, comment1.getAuthor());
-    }
-
-    @Test
-    public void getAuthority() {
-        assertEquals(authority, comment1.getAuthority());
     }
 
     @Test

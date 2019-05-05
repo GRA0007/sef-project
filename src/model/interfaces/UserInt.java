@@ -13,7 +13,7 @@ public interface UserInt {
 	
 	String getName();
 	
-	String getPhoneNO();
+	String getPhone();
 	
 	String getAddress();
 	

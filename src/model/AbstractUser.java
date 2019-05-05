@@ -13,16 +13,15 @@ import model.interfaces.UserInt;
  */
 public abstract class AbstractUser implements UserInt
 {
-		protected String userID;
-		protected String famName;
-		protected String givenName;
-		protected String address;
-		protected String phoneNo;
-		protected String email;
+		private String userID;
+		private String famName;
+		private String givenName;
+		private String address;
+		private String phoneNo;
+		private String email;
 		
-		public AbstractUser(String userID, String famName, String givenName, String address, 
-				String phoneNo, String email)
-		{
+		AbstractUser(String userID, String famName, String givenName, String address,
+				String phoneNo, String email) {
 			this.userID = userID.toUpperCase();
 			this.famName = famName.toUpperCase();
 			this.givenName = givenName.toUpperCase();
@@ -58,40 +57,35 @@ public abstract class AbstractUser implements UserInt
 		}
 		
 		//public accessor for child classes to the createFormattedString method
-		public String getFormattedString(String address)
+		String getFormattedString(String address)
 		{
 			return createFormattedString(address);
 		}
 		
-		@Override
-		public String getID() 
+		public String getID()
 		{
 			return this.userID;
 		}
 		
-		@Override
-		public String getName() 
+		public String getName()
 		{
 			return this.givenName+ " " +this.famName;
 		}
 		
-		@Override
-		public String getPhoneNO() 
+		public String getPhone()
 		{
 			return this.phoneNo;
 		}
 		
-		@Override
 		public String getAddress()
 		{
 			return this.address;
 		}
 
 		@Override
-		public String toString()
-		{
-			return String.format("%s:%s:%s:%s:%s:%s", 
-					this.userID, this.famName, this.givenName, this.address, this.phoneNo, this.email);
+		public String toString() {
+			return String.format("ID: %s\nName: %s %s\nAddress: %s\nPhone number: %s\nEmail: %s",
+					this.userID, this.givenName, this.famName, this.address, this.phoneNo, this.email);
 		}
 
 }
