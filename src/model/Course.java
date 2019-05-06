@@ -1,5 +1,7 @@
 package model;
 
+import model.interfaces.CommentInt;
+
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -35,6 +37,7 @@ public class Course extends AbstractStructure {
         return duration;
     }
 
+
     public String getCourseCode() {
         return courseCode;
     }
@@ -57,6 +60,7 @@ public class Course extends AbstractStructure {
         }
     return prerequisitesString;
     }
+
 
     @Override
     public String toString() {
