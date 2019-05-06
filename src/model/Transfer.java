@@ -1,6 +1,6 @@
 package model;
 
-public class Transfer extends AbstractStructure {
+public class Transfer extends AbstractCategory {
     @Override
     public String toString() {
         return null;

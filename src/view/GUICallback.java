@@ -58,7 +58,7 @@ public class GUICallback {
 
 
             - Delete a course
-            #call getStructure(int listNumber)
+            #call getCategory(int listNumber)
                 - Confirm deletion
 
 

@@ -1,12 +1,12 @@
 package model;
 
-import model.interfaces.StructureInt;
+import model.interfaces.CategoryInt;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public abstract class AbstractStructure implements StructureInt {
+public abstract class AbstractCategory implements CategoryInt {
 
     private List<Comment> commentList = new ArrayList<>();
 
@@ -30,12 +30,4 @@ public abstract class AbstractStructure implements StructureInt {
 
         return commentListString;
     }
-
-    public  String getComments(Staff staff){
-        return null;
-    }
-    public  String getComments(Date dateTime){
-       return null;
-    }
-
 }
