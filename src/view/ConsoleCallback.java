@@ -4,7 +4,6 @@ import model.Staff;
 import model.Storage;
 import model.Student;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleCallback {

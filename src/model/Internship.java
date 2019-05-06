@@ -1,6 +1,14 @@
 package model;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
+=======
+public class Internship extends AbstractCategory {
+    @Override
+    public String toString() {
+        return null;
+    }
+>>>>>>> master
 
 public class Internship extends AbstractStructure
 {

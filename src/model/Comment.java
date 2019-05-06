@@ -10,29 +10,14 @@ public class Comment implements CommentInt
     private Staff author;
     private Date date;
 
-    // Instantiate the comment, author, date
     public Comment(String comment, Staff author) {
         this.comment = comment;
         this.author = author;
         this.date = new Date();
     }
 
-    public Comment(String comment, Staff author, Date date) {
-        this.comment = comment;
-        this.author = author;
-        this.date = date;
-    }
-
-    public void setComment(String comment){
-        this.comment = comment;
-    }
-
     public void setAuthor(Staff author){
         this.author = author;
-    }
-
-    public void setDate(Date date){
-        this.date = date;
     }
 
     public String getComment(){
