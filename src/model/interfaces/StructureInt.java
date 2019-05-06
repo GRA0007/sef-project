@@ -10,8 +10,6 @@ public interface StructureInt {
 
     String getDuration();
 
-    void addComment(CommentInt comment);
-
     //Loop through all the comments for the structure
     //and return as a string is toString in comment class
     String getComments();

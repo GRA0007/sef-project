@@ -1,24 +1,34 @@
 package model;
 
-import model.interfaces.CommentInt;
 import model.interfaces.StructureInt;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class AbstractStructure implements StructureInt {
+
+    private List<Comment> commentList = new ArrayList<>();
 
     public abstract String toString();
 
     public abstract String getDuration();
 
-    public void addComment(CommentInt comment){
+    public void addComment(Comment comment){
 
+        commentList.add(comment);
     }
 
-    //Loop through all the comments for the structure
-    //and return as a string is toString in comment class
     public String getComments(){
-       return null;
+
+        String commentListString = "";
+
+        for (Comment currentComment:
+             commentList) {
+            commentListString += currentComment.toString() + "\n";
+        }
+
+        return commentListString;
     }
 
     public  String getComments(Staff staff){
