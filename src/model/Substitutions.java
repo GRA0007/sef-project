@@ -1,14 +1,16 @@
 package model;
 
-public class Substitutions extends AbstractStructure
+public class Substitutions extends AbstractCategory
 {
+	private Student student;
+	
 	private String originalCourse;
 	private String substituteCourse;
 	private String reasonForSubstitution;
 	
 	public Substitutions(Student student, String originalCourse, String substituteCourse, String reasonForSubstitution)
 	{
-		super(student);
+		this.student = student;
 		this.originalCourse = originalCourse;
 		this.substituteCourse = substituteCourse;
 		this.reasonForSubstitution = reasonForSubstitution + "\n" + new AppendTimestamp().getTimestamp();
@@ -52,7 +54,10 @@ public class Substitutions extends AbstractStructure
 	@Override
 	public String toString()
 	{
-		return super.toString() + String.format("Origianl Course:\t%s\nSubstituted Course:\t%s\n"
+		String tbc = String.format("Student ID:\t\t%s\nStudent Name:\t\t%s\n", student.getID(), student.getName());
+
+		
+		return tbc + String.format("Origianl Course:\t%s\nSubstituted Course:\t%s\n"
 				+ "Reason for Substitution:\n%s", this.originalCourse, this.substituteCourse, this.reasonForSubstitution);
 	}
 

@@ -7,13 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramStructure implements ProgramStructureInt {
-<<<<<<< HEAD
 
-	private List<AbstractStructure> structures = new ArrayList<>();
-=======
-    private String name;
     private List<AbstractCategory> categories = new ArrayList<>();
->>>>>>> master
 
     public void addCategory(AbstractCategory structure) {
         categories.add(structure);

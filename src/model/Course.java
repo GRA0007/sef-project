@@ -24,18 +24,8 @@ public class Course extends AbstractCategory {
         this.coordinator = coordinator;
         this.prerequisites = prerequisites;
         this.isExemption = isExemption;
-
-<<<<<<< HEAD
-    public Course(Student student)
-	{
-		super(student);
-		// TODO Auto-generated constructor stub
-	}
-
-	public String toString(){
-        return null;
-=======
->>>>>>> master
+        
+        
     }
 
     @Override

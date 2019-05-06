@@ -1,17 +1,12 @@
 package model;
 
-<<<<<<< HEAD
 import java.time.LocalDate;
-=======
-public class Internship extends AbstractCategory {
-    @Override
-    public String toString() {
-        return null;
-    }
->>>>>>> master
 
-public class Internship extends AbstractStructure
+
+public class Internship extends AbstractCategory
 {
+	private Student student;
+	
 	private String program; 
 	private String studentProgress; 
 	private String advice;
@@ -25,7 +20,7 @@ public class Internship extends AbstractStructure
    
 	public Internship(Student student, String program, String studentProgress, String advice)
 	{
-		super(student);
+		this.student = student;
 		this.program = program;
 		this.studentProgress = studentProgress;
 		this.advice = advice;
@@ -33,7 +28,7 @@ public class Internship extends AbstractStructure
 	
 	public Internship(Student student, String company, LocalDate startDate, LocalDate endDate, String contactPerson)
 	{
-		super(student);
+		this.student = student;
 		this.company = company;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -120,13 +115,16 @@ public class Internship extends AbstractStructure
     @Override
     public String toString() 
     {
+    	
+		String tbc = String.format("Student ID:\t\t%s\nStudent Name:\t\t%s\n", student.getID(), student.getName());
+
   
 		if (!gainedInternship)
-		return super.toString() + String.format("Phone:\t\t\t%s\nProgram:\t\t%s\nStudent Progress:\t%s\nAdvice:"
+		return tbc + String.format("Phone:\t\t\t%s\nProgram:\t\t%s\nStudent Progress:\t%s\nAdvice:"
 				+ "\t\t\t%s\nDate:\t\t\t%s", student.getPhone(), this.program, this.studentProgress, this.advice, 
 				new AppendTimestamp().getTimestamp());
 		
-		return super.toString() + String.format("Company:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n"
+		return tbc + String.format("Company:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n"
 				, this.company, this.startDate, this.endDate, this.contactPerson);
     }
 

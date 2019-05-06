@@ -1,14 +1,16 @@
 package model;
 
-public class AtRiskStudent extends AbstractStructure
+public class AtRiskStudent extends AbstractCategory
 {
+	private Student student;
+	
 	private int stageRisk;
 	private String reasonForRisk;
 	private String adviceGiven;
 	
 	public AtRiskStudent(Student student, int stageRisk, String reasonForRisk, String adviceGiven)
 	{
-		super(student);
+		this.student = student;
 		this.stageRisk = stageRisk;
 		this.reasonForRisk = reasonForRisk;
 		this.adviceGiven = adviceGiven;
@@ -38,11 +40,14 @@ public class AtRiskStudent extends AbstractStructure
 	{
 		return adviceGiven;
 	}
+	
 
 	@Override
 	public String toString()
 	{
-		return super.toString() + "\n" + String.format("Risk Stage:\t\t%s\nReason for being at risk:\n%s\nAdvice:\n%s", 
+		String tbc = String.format("Student ID:\t\t%s\nStudent Name:\t\t%s\n", student.getID(), student.getName());
+		
+		return tbc + "\n" + String.format("Risk Stage:\t\t%s\nReason for being at risk:\n%s\nAdvice:\n%s", 
 				this.stageRisk, this.reasonForRisk, this.adviceGiven);
 	}
 

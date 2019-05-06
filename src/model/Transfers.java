@@ -2,8 +2,10 @@ package model;
 
 import java.time.LocalDate;
 
-public class Transfers extends AbstractStructure
+public class Transfers extends AbstractCategory
 {
+	private Student student;
+	
 	private LocalDate date;
 	private String previousCourse;
 	private String problemsFaced;
@@ -11,7 +13,7 @@ public class Transfers extends AbstractStructure
 
 	public Transfers(Student student, LocalDate date, String previousCourse, String problemsFaced, String adviceGiven)
 	{
-		super(student);
+		this.student = student;
 		this.date = date;
 		this.previousCourse = previousCourse;
 		this.problemsFaced = problemsFaced;
@@ -41,7 +43,10 @@ public class Transfers extends AbstractStructure
 	@Override
 	public String toString()
 	{
-		return super.toString() + "\n" + String.format("Date:\t\t\t%s\nPromblems Faced by Student:\n%s\n\nAdvice:\n%s", 
+		String tbc = String.format("Student ID:\t\t%s\nStudent Name:\t\t%s\n", student.getID(), student.getName());
+
+		
+		return tbc + "\n" + String.format("Date:\t\t\t%s\nPromblems Faced by Student:\n%s\n\nAdvice:\n%s", 
 				this.date, this.problemsFaced, this.adviceGiven);
 	}
 
