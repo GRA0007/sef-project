@@ -1,25 +1,25 @@
 package model;
 
 import model.interfaces.ProgramStructureInt;
-import model.interfaces.StructureInt;
+import model.interfaces.CategoryInt;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramStructure implements ProgramStructureInt {
     private String name;
-    private List<AbstractStructure> structures = new ArrayList<>();
+    private List<AbstractCategory> categories = new ArrayList<>();
 
-    public void addStructure(AbstractStructure structure) {
-        structures.add(structure);
+    public void addCategory(AbstractCategory structure) {
+        categories.add(structure);
     }
 
-    public StructureInt getStructure(int listNumber) {
-        return structures.get(listNumber);
+    public CategoryInt getCategory(int listNumber) {
+        return categories.get(listNumber);
     }
 
-    public void deleteStructure(AbstractStructure structure) {
-        structures.remove(structure);
+    public void deleteCategory(AbstractCategory category) {
+        categories.remove(category);
     }
 
     public String toString() {

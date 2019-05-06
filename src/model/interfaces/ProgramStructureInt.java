@@ -1,6 +1,6 @@
 package model.interfaces;
 
-import model.AbstractStructure;
+import model.AbstractCategory;
 
 public interface ProgramStructureInt {
     /*
@@ -10,9 +10,9 @@ public interface ProgramStructureInt {
      * List<Exemption> structures
      */
 
-    void addStructure(AbstractStructure structure);
-    StructureInt getStructure(int listNumber);
-    void deleteStructure(AbstractStructure structure);
+    void addCategory(AbstractCategory structure);
+    CategoryInt getCategory(int listNumber);
+    void deleteCategory(AbstractCategory structure);
 
     //create hash map here for comparisons
     //hashmap is deleted for each time toString is called

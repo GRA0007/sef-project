@@ -1,6 +1,6 @@
 package model;
 
-public class Internship extends AbstractStructure{
+public class Internship extends AbstractCategory {
     @Override
     public String toString() {
         return null;

@@ -1,11 +1,9 @@
 package model;
 
-import model.interfaces.CommentInt;
-
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class Course extends AbstractStructure {
+public class Course extends AbstractCategory {
 
     private String courseCode;
     private String courseName;
@@ -15,8 +13,9 @@ public class Course extends AbstractStructure {
     private String completedOrNot = "";
     private Staff coordinator;
     private Course[] prerequisites;
+    private boolean isExemption;
 
-    public Course(String courseCode, String courseName, Staff coordinator, Course[] prerequisites, Date startDate, boolean isCompleted, Date endDate) {
+    public Course(String courseCode, String courseName, Staff coordinator, Course[] prerequisites, Date startDate, boolean isCompleted, Date endDate, boolean isExemption) {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.startDate = startDate;
@@ -24,6 +23,7 @@ public class Course extends AbstractStructure {
         this.isCompleted = isCompleted;
         this.coordinator = coordinator;
         this.prerequisites = prerequisites;
+        this.isExemption = isExemption;
 
     }
 
@@ -61,6 +61,11 @@ public class Course extends AbstractStructure {
     return prerequisitesString;
     }
 
+
+    public boolean getExemption()
+    {
+        return isExemption;
+    }
 
     @Override
     public String toString() {
