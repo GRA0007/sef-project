@@ -72,8 +72,7 @@ class ExemptionTest
 	void printOutTest() //tests that the comment file is appropriately matched
 	{
 		a.addComment("This is a test");
-		System.out.println(a.toString());
-		
+		System.out.println(a.toString());		
 	}
 	
 	@Test

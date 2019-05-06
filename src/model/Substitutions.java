@@ -11,7 +11,7 @@ public class Substitutions extends AbstractStructure
 		super(student);
 		this.originalCourse = originalCourse;
 		this.substituteCourse = substituteCourse;
-		this.reasonForSubstitution = reasonForSubstitution + "\n" + new AppendTimestamp().getTimestamp();
+		this.reasonForSubstitution = reasonForSubstitution + "\n" + getTimestamp();
 	}
 	
 	public String getOriginalCourse()

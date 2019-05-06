@@ -26,7 +26,7 @@ public class Exemption extends AbstractStructure implements model.interfaces.Exe
 		super(student);
 		this.staff = staff;
 		
-		this.dateRequested = new AppendTimestamp().getTimestamp().toString();
+		this.dateRequested = getTimestamp().toString();
 		this.exemptionRequest = exemptionRequest;
 		this.challengeExamDate = challengeExamDate;
 		this.decision = decision;
@@ -108,7 +108,7 @@ public class Exemption extends AbstractStructure implements model.interfaces.Exe
 			// date associated
 			pr.println(comment);
 			pr.println("Staff Member: " + staff.getID());
-			pr.println(new AppendTimestamp().getTimestamp());
+			pr.println(getTimestamp());
 
 			pr.close();
 		}

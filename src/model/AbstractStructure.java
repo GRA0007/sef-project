@@ -5,7 +5,7 @@ import model.interfaces.StructureInt;
 
 import java.util.Date;
 
-public abstract class AbstractStructure implements StructureInt{
+public abstract class AbstractStructure extends AppendTimestamp implements StructureInt{
 
 	protected Student student;
 	
