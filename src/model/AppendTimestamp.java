@@ -3,7 +3,7 @@ package model;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public abstract class AppendTimestamp
+public class AppendTimestamp
 {
 	 private Timestamp timeStamp;
 		
