@@ -23,7 +23,16 @@ public class ProgramStructure implements ProgramStructureInt {
     }
 
     public String toString() {
-        return null;
+        if (categories.size() == 0) {
+            return "Program structure is empty";
+        } else {
+            StringBuilder output = new StringBuilder();
+            for (AbstractCategory category : categories) {
+                output.append("\n").append(category.getClass().getSimpleName());
+                output.append(category.toString()).append("\n");
+            }
+            return output.toString();
+        }
     }
 
     public String toString(int filter) {

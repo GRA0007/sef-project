@@ -29,12 +29,15 @@ public class Course extends AbstractCategory {
 
     @Override
     public String getDuration() {
+        if (isCompleted) {
+            long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
-        long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
-        String duration = diff + " months";
-        return duration;
+            String duration = diff + " months";
+            return duration;
+        } else {
+            return "N/A";
+        }
     }
 
 
@@ -48,17 +51,15 @@ public class Course extends AbstractCategory {
 
     public String getPrerequisites() {
 
-        String prerequisitesString = "";
-        for (int i = 0; i < prerequisites.length; i++) {
-
-            if (i == 0) {
-                prerequisitesString = "Prerequisites:";
+        if (prerequisites != null) {
+            StringBuilder prerequisitesString = new StringBuilder();
+            for (Course prerequisite : prerequisites) {
+                prerequisitesString.append(prerequisite.getCourseCode()).append(": ").append(prerequisite.getCourseName()).append("\n");
             }
-
-            prerequisitesString = String.format("%s\n%-30s%s", prerequisitesString, "Prerequisites:", prerequisites[i].getCourseCode() + ":" + prerequisites[i].getCourseName());
-
+            return prerequisitesString.toString();
+        } else {
+            return "None";
         }
-    return prerequisitesString;
     }
 
 
@@ -73,8 +74,8 @@ public class Course extends AbstractCategory {
 
         toString = String.format("%s\n%-30s%s", toString, "Course code:", this.courseCode);
         toString = String.format("%s\n%-30s%s", toString, "Course name:", this.courseName);
-        toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", this.coordinator);
-        toString = String.format("%s\n%-30s%s", toString, this.getPrerequisites());
+        toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", this.coordinator.getName());
+        toString = String.format("%s\n%-30s%s", toString, "Prerequisites:", this.getPrerequisites());
         toString = String.format("%s\n%-30s%s", toString, "Course duration:", this.getDuration());
 
         if (isCompleted) {

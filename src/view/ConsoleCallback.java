@@ -1,9 +1,13 @@
 package view;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import model.Course;
 import model.Staff;
 import model.Storage;
 import model.Student;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ConsoleCallback {
@@ -47,6 +51,57 @@ public class ConsoleCallback {
             System.out.println("Exiting");
         } else {
             input = next;
+        }
+        return input;
+    }
+
+    // Get user input - date
+    private Date getDate(String question) {
+        Date input = null;
+        boolean ok = false;
+
+        while (!ok) {
+            System.out.print(question + " (DDMMYYYY): ");
+            String next = scanner.nextLine();
+            if (next.equals("")) {
+                System.out.println("Exiting");
+                ok = true;
+            } else {
+                if (next.length() == 8) {
+                    Calendar startDate = Calendar.getInstance();
+                    startDate.set(Calendar.DAY_OF_MONTH, Integer.valueOf(next.substring(0, 1)));
+                    startDate.set(Calendar.MONTH, Integer.valueOf(next.substring(1, 3)));
+                    startDate.set(Calendar.YEAR, Integer.valueOf(next.substring(3, 7)));
+
+                    input = startDate.getTime();
+                    ok = true;
+                } else {
+                    System.out.println("Date not valid");
+                }
+            }
+        }
+        return input;
+    }
+
+    // Get user input - boolean
+    private Boolean getBoolean(String question) {
+        Boolean input = null;
+        boolean ok = false;
+
+        while (!ok) {
+            System.out.print(question + " (Y/N): ");
+            String next = scanner.nextLine();
+            if (next.equals("")) {
+                System.out.println("Exiting");
+                ok = true;
+            } else {
+                if (next.equals("Y") || next.equals("N")) {
+                    input = next.equals("Y");
+                    ok = true;
+                } else {
+                    System.out.println("Must be Y or N");
+                }
+            }
         }
         return input;
     }
@@ -215,6 +270,7 @@ public class ConsoleCallback {
 
         // View student
         if (selectedStudent != null) {
+            System.out.println("\n" + selectedStudent.toString());
             selectedStudentActions();
         } else {
             System.out.println("Student doesn't exist.");
@@ -262,13 +318,11 @@ public class ConsoleCallback {
     }
 
     private void selectedStudentActions() {
-        System.out.println("\n" + selectedStudent.toString());
-
         // Viewing student
-        String[] options = new String[] {"View program structure", "Filter program structure", "Close student"};
+        String[] options = new String[] {"View program structure", "Filter program structure", "Edit program structure", "Close student"};
         int choice = getChoice(options);
         if (choice == 0) {
-            System.out.println(String.valueOf(selectedStudent.getProgramStructure()));
+            System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString()));
             //TODO: Print program structure and allow viewing of comments
             selectedStudentActions();
         } else if (choice == 1) {
@@ -276,6 +330,13 @@ public class ConsoleCallback {
             //TODO: Print program structure and allow viewing of comments
             selectedStudentActions();
         } else if (choice == 2) {
+            if (currentUser.authorityAccess()) {
+                editStudent();
+            } else {
+                System.out.println("You don't have authority to edit students");
+                selectedStudentActions();
+            }
+        } else if (choice == 3) {
             studentActions();
         }
     }
@@ -284,7 +345,40 @@ public class ConsoleCallback {
         String[] options = new String[] {"Add course", "Add exemption", "Add transfer", "Add internship", "Exit edit mode"};
         int choice = getChoice(options);
         if (choice == 0) {
-            System.out.println("Course object not defined yet...");
+            String courseCode = getInput("Course code");
+            if (courseCode == null) {
+                editStudent();
+                return;
+            }
+
+            String courseName = getInput("Course name");
+            if (courseName == null) {
+                editStudent();
+                return;
+            }
+
+            Date startDate = getDate("Start date");
+            if (startDate == null) {
+                editStudent();
+                return;
+            }
+
+            Date endDate = null;
+
+            Boolean isCompleted = getBoolean("Course completed?");
+            if (isCompleted == null) {
+                editStudent();
+                return;
+            } else if (isCompleted) {
+                endDate = getDate("End date");
+                if (endDate == null) {
+                    editStudent();
+                    return;
+                }
+            }
+
+            Course newCourse = new Course(courseCode,courseName, storage.authUser("e1234", ""), null, startDate, isCompleted, endDate, false);
+            selectedStudent.getProgramStructure().addCategory(newCourse);
             editStudent();
         } else if (choice == 1) {
             System.out.println("Exemption object not defined yet...");
@@ -296,6 +390,7 @@ public class ConsoleCallback {
             System.out.println("Internship object not defined yet...");
             editStudent();
         } else if (choice == 4) {
+            System.out.println("\n" + selectedStudent.toString());
             selectedStudentActions();
         }
     }
