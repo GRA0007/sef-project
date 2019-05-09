@@ -6,18 +6,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class CommentTest {
 
-    Comment comment1;
-    Date currentDate = new Date( );
-    int authority  = 1;
-    String comment  = "This is a dummaz comment to test the bloody testing class";
-    Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", false);
+    private Comment comment1;
+    private Date currentDate = new Date( );
+    private int authority  = 1;
+    private String comment  = "This is a dummaz comment to test the bloody testing class";
+    private Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", false);
 
     public static void main(String[] args){
 
@@ -26,10 +25,7 @@ public class CommentTest {
     @Before
     public void setUp() throws Exception {
 
-        SimpleDateFormat ft =
-                new SimpleDateFormat ("yyyy.MM.dd");
-
-        comment1 = new Comment(comment,author, currentDate);
+        comment1 = new Comment(comment,author);
     }
 
     @After

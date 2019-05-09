@@ -27,7 +27,6 @@ public abstract class AbstractCategory implements CategoryInt {
              commentList) {
             commentListString += currentComment.toString() + "\n";
         }
-
         return commentListString;
     }
 }
