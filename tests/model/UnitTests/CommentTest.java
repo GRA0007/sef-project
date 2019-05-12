@@ -17,7 +17,7 @@ public class CommentTest {
     Date currentDate = new Date( );
     int authority  = 1;
     String comment  = "This is a dummaz comment to test the bloody testing class";
-    Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", false);
+    Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", 0);
 
     public static void main(String[] args){
 
@@ -38,7 +38,7 @@ public class CommentTest {
 
     @Test
     public void editAuthor() {
-        Staff notMilroy = new Staff("e1234","Not","Milroy", "", "", "", "", "", false);
+        Staff notMilroy = new Staff("e1234","Not","Milroy", "", "", "", "", "", 0);
         comment1.setAuthor(notMilroy);
         assertEquals(notMilroy, comment1.getAuthor());
         System.out.println("\nNew auth name: " + comment1.getAuthor());

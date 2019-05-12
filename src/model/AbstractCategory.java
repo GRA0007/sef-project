@@ -11,6 +11,8 @@ public abstract class AbstractCategory implements CategoryInt
 
 
 	private List<Comment> commentList = new ArrayList<>();
+
+	protected Staff staff;
 	
 	public abstract String toString();
 
@@ -25,14 +27,20 @@ public abstract class AbstractCategory implements CategoryInt
 	public String getComments()
 	{
 
-		String commentListString = "";
+		StringBuilder commentListString = new StringBuilder();
 
-		for (Comment currentComment : commentList)
-		{
-			commentListString += currentComment.toString() + "\n";
+		if (commentList.size() > 0) {
+			for (Comment currentComment : commentList) {
+				commentListString.append(currentComment.toString()).append("\n");
+			}
+		} else {
+			commentListString.append("No comments\n");
 		}
 
-		return commentListString;
+		return commentListString.toString();
 	}
 
+	public Staff getStaff() {
+		return staff;
+	}
 }

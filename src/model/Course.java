@@ -11,7 +11,6 @@ public class Course extends AbstractCategory {
     private Date endDate;
     private boolean isCompleted = false;
     private String completedOrNot = "";
-    private Staff coordinator;
     private Course[] prerequisites;
     private boolean isExemption;
 
@@ -21,21 +20,21 @@ public class Course extends AbstractCategory {
         this.startDate = startDate;
         this.endDate = endDate;
         this.isCompleted = isCompleted;
-        this.coordinator = coordinator;
+        this.staff = coordinator;
         this.prerequisites = prerequisites;
         this.isExemption = isExemption;
-        
-        
     }
 
     @Override
     public String getDuration() {
+        if (isCompleted) {
+            long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
-        long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
-        String duration = diff + " months";
-        return duration;
+            return diff + " months";
+        } else {
+            return "N/A";
+        }
     }
 
 
@@ -49,17 +48,15 @@ public class Course extends AbstractCategory {
 
     public String getPrerequisites() {
 
-        String prerequisitesString = "";
-        for (int i = 0; i < prerequisites.length; i++) {
-
-            if (i == 0) {
-                prerequisitesString = "Prerequisites:";
+        if (prerequisites != null) {
+            StringBuilder prerequisitesString = new StringBuilder();
+            for (Course prerequisite : prerequisites) {
+                prerequisitesString.append(prerequisite.getCourseCode()).append(": ").append(prerequisite.getCourseName());
             }
-
-            prerequisitesString = String.format("%s\n%-30s%s", prerequisitesString, "Prerequisites:", prerequisites[i].getCourseCode() + ":" + prerequisites[i].getCourseName());
-
+            return prerequisitesString.toString();
+        } else {
+            return "None";
         }
-    return prerequisitesString;
     }
 
 
@@ -74,8 +71,8 @@ public class Course extends AbstractCategory {
 
         toString = String.format("%s\n%-30s%s", toString, "Course code:", this.courseCode);
         toString = String.format("%s\n%-30s%s", toString, "Course name:", this.courseName);
-        toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", this.coordinator);
-        toString = String.format("%s\n%-30s%s", toString, this.getPrerequisites());
+        toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", this.staff.getName());
+        toString = String.format("%s\n%-30s%s", toString, "Prerequisites:", this.getPrerequisites());
         toString = String.format("%s\n%-30s%s", toString, "Course duration:", this.getDuration());
 
         if (isCompleted) {

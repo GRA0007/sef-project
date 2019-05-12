@@ -1,38 +1,35 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 
 public class Internship extends AbstractCategory
 {
-	private Student student;
-	
-	private String program; 
-	private String studentProgress; 
-	private String advice;
-	
 	private String company; 
-	private LocalDate startDate; 
-	private LocalDate endDate; 
+	private Date startDate;
+	private boolean completed;
+	private Date endDate;
 	private String contactPerson;
 	
 	private boolean gainedInternship = false;
-   
-	public Internship(Student student, String program, String studentProgress, String advice)
+
+	public Internship(String advice, Staff staff)
+    {
+        // They don't have an internship yet, add advice given as a comment
+        this.addComment(new Comment(advice, staff));
+
+        this.staff = staff;
+        gainedInternship = false;
+    }
+	public Internship(String company, Date startDate, boolean completed, Date endDate, String contactPerson, Staff staff)
 	{
-		this.student = student;
-		this.program = program;
-		this.studentProgress = studentProgress;
-		this.advice = advice;
-	}
-	
-	public Internship(Student student, String company, LocalDate startDate, LocalDate endDate, String contactPerson)
-	{
-		this.student = student;
 		this.company = company;
 		this.startDate = startDate;
+		this.completed = completed;
 		this.endDate = endDate;
 		this.contactPerson = contactPerson;
+		this.staff = staff;
 		
 		this.gainedInternship = true;
 	}
@@ -47,22 +44,22 @@ public class Internship extends AbstractCategory
 		return this.gainedInternship;
 	}
 
-    public LocalDate getStartDate()
+    public Date getStartDate()
 	{
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate)
+	public void setStartDate(Date startDate)
 	{
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate()
+	public Date getEndDate()
 	{
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate)
+	public void setEndDate(Date endDate)
 	{
 		this.endDate = endDate;
 	}
@@ -82,31 +79,6 @@ public class Internship extends AbstractCategory
 		return company;
 	}
 
-	public String getStudentProgress()
-	{
-		return studentProgress;
-	}
-
-	public void setStudentProgress(String studentProgress)
-	{
-		this.studentProgress = studentProgress;
-	}
-
-	public String getAdvice()
-	{
-		return advice;
-	}
-
-	public void setAdvice(String advice)
-	{
-		this.advice = advice;
-	}
-
-	public String getProgram()
-	{
-		return program;
-	}
-
 	@Override
     public String getDuration() {
         return null;
@@ -115,15 +87,11 @@ public class Internship extends AbstractCategory
     @Override
     public String toString() 
     {
-    	
-		String tbc = String.format("Student ID:\t\t%s\nStudent Name:\t\t%s\n", student.getID(), student.getName());
-
   
 		if (!gainedInternship)
-		return tbc + String.format("Phone:\t\t\t%s\nProgram:\t\t%s\nStudent Progress:\t%s\nAdvice:"
-				+ "\t\t\t%s", student.getPhone(), this.program, this.studentProgress, this.advice);
+		return "\nGained internship:\t\tNo\nAdvice given:\t\tSee comments";
 		
-		return tbc + String.format("Company:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n"
+		return String.format("\nCompany:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n"
 				, this.company, this.startDate, this.endDate, this.contactPerson);
     }
 
