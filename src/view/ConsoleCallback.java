@@ -245,7 +245,7 @@ public class ConsoleCallback {
             System.out.println("\nPasswords must match. Try again.");
             signup();
         } else {
-            currentUser = storage.addUser(staffId, given, last_name, address, phone, department, title, false, pass);
+            currentUser = storage.addUser(staffId, given, last_name, address, phone, department, title, 0, pass);
             // Logged in
             System.out.println("\nWelcome " + currentUser.getName());
             studentActions();
@@ -266,7 +266,7 @@ public class ConsoleCallback {
 
             selectedStudent = storage.getStudent(studentId);
         } else if (choice == 1) {
-            if (currentUser.hasAuthorityAccess()) {
+            if (currentUser.authorityAccess() > 2) {
                 createStudent();
             } else {
                 System.out.println("You don't have authority to create students.");
@@ -342,7 +342,7 @@ public class ConsoleCallback {
             //TODO: Print program structure and allow viewing of comments
             selectedStudentActions();
         } else if (choice == 2) {
-            if (currentUser.authorityAccess()) {
+            if (currentUser.authorityAccess() > 2) {
                 editStudent();
             } else {
                 System.out.println("You don't have authority to edit students");

@@ -13,8 +13,8 @@ public class Storage implements StorageInt {
 
     // Load the data from the database
     public void loadData() {
-        Staff testStaff1 = new Staff("e1234","da sokk","Milroy", "10 Street, Suburb", "5555555555", "milroy@rmit.edu.au", "Software Engineering", "Lecturer", true);
-        Staff testStaff2 = new Staff("e5678","da sokk","Not Milroy", "10 Street, Suburb", "5555555555", "notmilroy@rmit.edu.au", "Software Engineering", "Lecturer", false);
+        Staff testStaff1 = new Staff("e1234","da sokk","Milroy", "10 Street, Suburb", "5555555555", "milroy@rmit.edu.au", "Software Engineering", "Lecturer", 3);
+        Staff testStaff2 = new Staff("e5678","da sokk","Not Milroy", "10 Street, Suburb", "5555555555", "notmilroy@rmit.edu.au", "Software Engineering", "Lecturer", 0);
         staff.add(testStaff1);
         staff.add(testStaff2);
 
@@ -39,7 +39,7 @@ public class Storage implements StorageInt {
     }
 
     // Register a new staff member
-    public Staff addUser(String staffId, String given, String family, String address, String phone, String department, String jobTitle, boolean authority, String pass) {
+    public Staff addUser(String staffId, String given, String family, String address, String phone, String department, String jobTitle, int authority, String pass) {
         Staff newUser = new Staff(staffId, family, given, address, phone, staffId + "@rmit.edu.au", department, jobTitle, authority);
         staff.add(newUser);
         return newUser;

@@ -1,16 +1,16 @@
 package model;
 
-public class Staff extends AbstractUser implements model.interfaces.Staff
+public class Staff extends AbstractUser
 {
 
 	private String department;
-	private boolean authority; // Basic privacy method that enables access to certain student information
+	private int authority; // Basic privacy method that enables access to certain student information
 
 	private String staffTitle; // At the moment this serves as a label for for staff's position title
 								// for example, Course Coordinator or Program Manager
 
 	public Staff(String userID, String famName, String givenName, String address, String phoneNo, String email,
-			String department, String staffTitle, boolean authority)
+			String department, String staffTitle, int authority)
 
 	{
 		super(userID, famName, givenName, address, phoneNo, email);
@@ -21,14 +21,12 @@ public class Staff extends AbstractUser implements model.interfaces.Staff
 	}
 
 	
-	@Override
-	public boolean hasAuthorityAccess()
+	public int authorityAccess()
 	{
 		return authority;
 	}
 
-	@Override
-	public void setAuthority(boolean authority) // sets staff accessibility privileges
+	public void setAuthority(int authority) // sets staff accessibility privileges
 
 	{
 		this.authority = authority;
