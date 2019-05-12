@@ -1,19 +1,23 @@
 package model;
 
-public class Substitutions extends AbstractCategory
+import java.util.Date;
+
+public class Substitution extends AbstractCategory
 {
 	private Student student;
 	
 	private String originalCourse;
 	private String substituteCourse;
 	private String reasonForSubstitution;
+	private Date date;
 	
-	public Substitutions(Student student, String originalCourse, String substituteCourse, String reasonForSubstitution)
+	public Substitution(Student student, String originalCourse, String substituteCourse, String reasonForSubstitution, Date date)
 	{
 		this.student = student;
 		this.originalCourse = originalCourse;
 		this.substituteCourse = substituteCourse;
-		this.reasonForSubstitution = reasonForSubstitution + "\n" + new AppendTimestamp().getTimestamp();
+		this.reasonForSubstitution = reasonForSubstitution;
+		this.date = date;
 	}
 	
 	public String getOriginalCourse()
@@ -58,7 +62,8 @@ public class Substitutions extends AbstractCategory
 
 		
 		return tbc + String.format("Origianl Course:\t%s\nSubstituted Course:\t%s\n"
-				+ "Reason for Substitution:\n%s", this.originalCourse, this.substituteCourse, this.reasonForSubstitution);
+				+ "Reason for Substitution:\n%s\nDate:\t%s", this.originalCourse,
+				this.substituteCourse, this.reasonForSubstitution, this.date);
 	}
 
 	@Override
