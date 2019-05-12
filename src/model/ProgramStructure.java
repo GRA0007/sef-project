@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramStructure implements ProgramStructureInt {
-    private String name;
+
     private List<AbstractCategory> categories = new ArrayList<>();
 
     public void addCategory(AbstractCategory structure) {

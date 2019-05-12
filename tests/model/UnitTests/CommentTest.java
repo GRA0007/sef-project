@@ -29,7 +29,7 @@ public class CommentTest {
         SimpleDateFormat ft =
                 new SimpleDateFormat ("yyyy.MM.dd");
 
-        comment1 = new Comment(comment,author, currentDate);
+        comment1 = new Comment(comment,author);
     }
 
     @After
