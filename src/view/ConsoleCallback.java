@@ -5,6 +5,7 @@ import model.*;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleCallback {
@@ -335,12 +336,9 @@ public class ConsoleCallback {
         int choice = getChoice(options);
         if (choice == 0) {
             System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString()));
-            //TODO: Print program structure and allow viewing of comments
-            selectedStudentActions();
+            programStructureActions(selectedStudent.getProgramStructure().getResults());
         } else if (choice == 1) {
-            System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_COURSE)));
-            //TODO: Print program structure and allow viewing of comments
-            selectedStudentActions();
+            filterStructure();
         } else if (choice == 2) {
             if (currentUser.authorityAccess() > 2) {
                 editStudent();
@@ -351,6 +349,51 @@ public class ConsoleCallback {
         } else if (choice == 3) {
             studentActions();
         }
+    }
+
+    private void filterStructure() {
+        String[] options = new String[] {"Filter by category (course, internship, etc.)", "Filter by staff member", "Filter by date & time", "Cancel"};
+        int choice = getChoice(options);
+        if (choice == 0) {
+            String[] filters = new String[] {"Courses", "Exemptions", "Internships", "Transfers", "Back"};
+            int filterChoice = getChoice(filters);
+            if (filterChoice == 0) {
+                System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_COURSE)));
+                programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_COURSE));
+                return;
+            } else if (filterChoice == 1) {
+                System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_EXEMPTION)));
+                programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_EXEMPTION));
+                return;
+            } else if (filterChoice == 2) {
+                System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_INTERNSHIP)));
+                programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_INTERNSHIP));
+                return;
+            } else if (filterChoice == 3) {
+                System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_TRANSFER)));
+                programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_TRANSFER));
+                return;
+            }
+            selectedStudentActions();
+        } else if (choice == 1) {
+            String staff_id = getInput("Staff id");
+            if (staff_id == null) {
+                filterStructure();
+                return;
+            }
+
+            System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(storage.getUser(staff_id))));
+            programStructureActions(selectedStudent.getProgramStructure().getResults(storage.getUser(staff_id)));
+        } else if (choice == 2) {
+            System.out.println("Not sure how we want to handle this");
+            selectedStudentActions();
+        } else {
+            selectedStudentActions();
+        }
+    }
+
+    private void programStructureActions(List<AbstractCategory> results) {
+        
     }
 
     private void editStudent() {
@@ -441,7 +484,7 @@ public class ConsoleCallback {
                 }
             }
 
-            Transfer newTransfer = new Transfer(fromProgram, toProgram, startDate, isCompleted, endDate);
+            Transfer newTransfer = new Transfer(fromProgram, toProgram, startDate, isCompleted, endDate, currentUser);
             selectedStudent.getProgramStructure().addCategory(newTransfer);
             editStudent();
         } else if (choice == 3) {
@@ -449,7 +492,6 @@ public class ConsoleCallback {
             Boolean hasInternship = getBoolean("Has the student got an internship?");
             if (hasInternship == null) {
                 editStudent();
-                return;
             } else if (hasInternship) {
                 String company = getInput("Company");
                 if (company == null) {
@@ -483,7 +525,7 @@ public class ConsoleCallback {
                     return;
                 }
 
-                Internship newInternship = new Internship(company, startDate, isCompleted, endDate, contactPerson);
+                Internship newInternship = new Internship(company, startDate, isCompleted, endDate, contactPerson, currentUser);
                 selectedStudent.getProgramStructure().addCategory(newInternship);
                 editStudent();
             } else {

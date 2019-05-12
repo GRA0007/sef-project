@@ -11,12 +11,13 @@ public class Transfer extends AbstractCategory {
     private boolean isTransferred;
 
 
-    public Transfer(String fromProgram, String toProgram, Date startDate, boolean isTransferred, Date endDate) {
+    public Transfer(String fromProgram, String toProgram, Date startDate, boolean isTransferred, Date endDate, Staff staff) {
         this.fromProgram = fromProgram;
         this.toProgram = toProgram;
         this.startDate = startDate;
         this.endDate = endDate;
         this.isTransferred= isTransferred;
+        this.staff = staff;
     }
 
     public String getFromProgram() {

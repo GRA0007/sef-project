@@ -11,7 +11,6 @@ public class Course extends AbstractCategory {
     private Date endDate;
     private boolean isCompleted = false;
     private String completedOrNot = "";
-    private Staff coordinator;
     private Course[] prerequisites;
     private boolean isExemption;
 
@@ -21,7 +20,7 @@ public class Course extends AbstractCategory {
         this.startDate = startDate;
         this.endDate = endDate;
         this.isCompleted = isCompleted;
-        this.coordinator = coordinator;
+        this.staff = coordinator;
         this.prerequisites = prerequisites;
         this.isExemption = isExemption;
     }
@@ -72,7 +71,7 @@ public class Course extends AbstractCategory {
 
         toString = String.format("%s\n%-30s%s", toString, "Course code:", this.courseCode);
         toString = String.format("%s\n%-30s%s", toString, "Course name:", this.courseName);
-        toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", this.coordinator.getName());
+        toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", this.staff.getName());
         toString = String.format("%s\n%-30s%s", toString, "Prerequisites:", this.getPrerequisites());
         toString = String.format("%s\n%-30s%s", toString, "Course duration:", this.getDuration());
 

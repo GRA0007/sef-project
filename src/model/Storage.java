@@ -22,7 +22,7 @@ public class Storage implements StorageInt {
         testStudent.getProgramStructure().addCategory(new Course("CYX123", "Software Engineering Fundamentals", testStaff1, null, new Date(), false, null, false));
         students.add(testStudent);
 
-        System.out.println("Loading test data...");
+        System.out.println("Test data loaded");
     }
 
     // Store the data in the database
@@ -43,6 +43,14 @@ public class Storage implements StorageInt {
         Staff newUser = new Staff(staffId, family, given, address, phone, staffId + "@rmit.edu.au", department, jobTitle, authority);
         staff.add(newUser);
         return newUser;
+    }
+
+    // Get a staff member by id
+    public Staff getUser(String staffId) {
+        return staff.stream()
+                .filter(staff -> staffId.equalsIgnoreCase(staff.getID()))
+                .findAny()
+                .orElse(null);
     }
 
     // Retrieve a student by student number

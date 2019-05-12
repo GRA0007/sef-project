@@ -18,15 +18,18 @@ public class Internship extends AbstractCategory
     {
         // They don't have an internship yet, add advice given as a comment
         this.addComment(new Comment(advice, staff));
+
+        this.staff = staff;
         gainedInternship = false;
     }
-	public Internship(String company, Date startDate, boolean completed, Date endDate, String contactPerson)
+	public Internship(String company, Date startDate, boolean completed, Date endDate, String contactPerson, Staff staff)
 	{
 		this.company = company;
 		this.startDate = startDate;
 		this.completed = completed;
 		this.endDate = endDate;
 		this.contactPerson = contactPerson;
+		this.staff = staff;
 		
 		this.gainedInternship = true;
 	}
@@ -86,9 +89,9 @@ public class Internship extends AbstractCategory
     {
   
 		if (!gainedInternship)
-		return "Gained internship:\t\tNo\nAdvice given:\t\tSee comments";
+		return "\nGained internship:\t\tNo\nAdvice given:\t\tSee comments";
 		
-		return String.format("Company:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n"
+		return String.format("\nCompany:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n"
 				, this.company, this.startDate, this.endDate, this.contactPerson);
     }
 

@@ -11,6 +11,8 @@ public abstract class AbstractCategory implements CategoryInt
 
 
 	private List<Comment> commentList = new ArrayList<>();
+
+	protected Staff staff;
 	
 	public abstract String toString();
 
@@ -35,4 +37,7 @@ public abstract class AbstractCategory implements CategoryInt
 		return commentListString;
 	}
 
+	public Staff getStaff() {
+		return staff;
+	}
 }
