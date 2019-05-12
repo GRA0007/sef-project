@@ -266,7 +266,7 @@ public class ConsoleCallback {
 
             selectedStudent = storage.getStudent(studentId);
         } else if (choice == 1) {
-            if (currentUser.authorityAccess()) {
+            if (currentUser.hasAuthorityAccess()) {
                 createStudent();
             } else {
                 System.out.println("You don't have authority to create students.");

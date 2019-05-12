@@ -24,7 +24,8 @@ public class Course extends AbstractCategory {
         this.coordinator = coordinator;
         this.prerequisites = prerequisites;
         this.isExemption = isExemption;
-
+        
+        
     }
 
     @Override
