@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramStructure implements ProgramStructureInt {
+    public static final int FILTER_COURSE = 0;
+    public static final int FILTER_EXEMPTION = 1;
+    public static final int FILTER_INTERNSHIP = 2;
+    public static final int FILTER_TRANSFER = 3;
+
     private String name;
     private List<AbstractCategory> categories = new ArrayList<>();
 
@@ -14,8 +19,17 @@ public class ProgramStructure implements ProgramStructureInt {
         categories.add(structure);
     }
 
-    public CategoryInt getCategory(int listNumber) {
+    public AbstractCategory getCategory(int listNumber) {
         return categories.get(listNumber);
+    }
+
+    public Course getCourseByCode(String code) {
+        for (AbstractCategory category : categories) {
+            if (category instanceof Course && ((Course)category).getCourseCode().equalsIgnoreCase(code)) {
+                return (Course) category;
+            }
+        }
+        return null;
     }
 
     public void deleteCategory(AbstractCategory category) {

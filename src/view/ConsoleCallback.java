@@ -1,10 +1,7 @@
 package view;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import model.Course;
-import model.Staff;
-import model.Storage;
-import model.Student;
+import model.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +35,21 @@ public class ConsoleCallback {
             }
         }
         return choice;
+    }
+
+    // Get csv user input
+    private String[] getList(String question) {
+        String[] input;
+
+        System.out.print(question + " (comma separated list): ");
+        String next = scanner.nextLine();
+        if (next.equals("")) {
+            input = null;
+            System.out.println("Exiting");
+        } else {
+            input = next.split(",");
+        }
+        return input;
     }
 
     // Get user input
@@ -326,7 +338,7 @@ public class ConsoleCallback {
             //TODO: Print program structure and allow viewing of comments
             selectedStudentActions();
         } else if (choice == 1) {
-            System.out.println(String.valueOf(selectedStudent.getProgramStructure()));
+            System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_COURSE)));
             //TODO: Print program structure and allow viewing of comments
             selectedStudentActions();
         } else if (choice == 2) {
@@ -344,7 +356,7 @@ public class ConsoleCallback {
     private void editStudent() {
         String[] options = new String[] {"Add course", "Add exemption", "Add transfer", "Add internship", "Exit edit mode"};
         int choice = getChoice(options);
-        if (choice == 0) {
+        if (choice == 0 || choice == 1) {
             String courseCode = getInput("Course code");
             if (courseCode == null) {
                 editStudent();
@@ -355,6 +367,20 @@ public class ConsoleCallback {
             if (courseName == null) {
                 editStudent();
                 return;
+            }
+
+            String[] prerequisitesString = null;
+            Course[] prerequisites = null;
+            Boolean hasPrerequisites = getBoolean("Are there any prerequisites?");
+            if (hasPrerequisites == null) {
+                editStudent();
+                return;
+            } else if (hasPrerequisites) {
+                prerequisitesString = getList("Prerequisites course codes");
+                prerequisites = new Course[prerequisitesString.length];
+                for (int i = 0; i < prerequisitesString.length; i++) {
+                    prerequisites[i] = selectedStudent.getProgramStructure().getCourseByCode(prerequisitesString[i]);
+                }
             }
 
             Date startDate = getDate("Start date");
@@ -377,11 +403,8 @@ public class ConsoleCallback {
                 }
             }
 
-            Course newCourse = new Course(courseCode,courseName, storage.authUser("e1234", ""), null, startDate, isCompleted, endDate, false);
+            Course newCourse = new Course(courseCode,courseName, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
             selectedStudent.getProgramStructure().addCategory(newCourse);
-            editStudent();
-        } else if (choice == 1) {
-            System.out.println("Exemption object not defined yet...");
             editStudent();
         } else if (choice == 2) {
             System.out.println("Transfer object not defined yet...");
