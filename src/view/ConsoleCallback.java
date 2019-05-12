@@ -357,6 +357,7 @@ public class ConsoleCallback {
         String[] options = new String[] {"Add course", "Add exemption", "Add transfer", "Add internship", "Exit edit mode"};
         int choice = getChoice(options);
         if (choice == 0 || choice == 1) {
+            // Course/Exemption
             String courseCode = getInput("Course code");
             if (courseCode == null) {
                 editStudent();
@@ -403,11 +404,45 @@ public class ConsoleCallback {
                 }
             }
 
-            Course newCourse = new Course(courseCode,courseName, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
+            Course newCourse = new Course(courseCode, courseName, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
             selectedStudent.getProgramStructure().addCategory(newCourse);
             editStudent();
         } else if (choice == 2) {
-            System.out.println("Transfer object not defined yet...");
+            // Transfer
+            String fromProgram = getInput("Transferred from (program code)");
+            if (fromProgram == null) {
+                editStudent();
+                return;
+            }
+
+            String toProgram = getInput("Transferred to (program code)");
+            if (toProgram == null) {
+                editStudent();
+                return;
+            }
+
+            Date startDate = getDate("Start date");
+            if (startDate == null) {
+                editStudent();
+                return;
+            }
+
+            Date endDate = null;
+
+            Boolean isCompleted = getBoolean("Transfer completed?");
+            if (isCompleted == null) {
+                editStudent();
+                return;
+            } else if (isCompleted) {
+                endDate = getDate("End date");
+                if (endDate == null) {
+                    editStudent();
+                    return;
+                }
+            }
+
+            Transfer newTransfer = new Transfer(fromProgram, toProgram, startDate, isCompleted, endDate);
+            selectedStudent.getProgramStructure().addCategory(newTransfer);
             editStudent();
         } else if (choice == 3) {
             System.out.println("Internship object not defined yet...");
