@@ -68,6 +68,30 @@ public class ConsoleCallback {
         return input;
     }
 
+    // Get user input - number
+    private Integer getNumber(String question) {
+        Integer input = null;
+        boolean ok = false;
+
+        while (!ok) {
+            System.out.print(question + ": ");
+            try {
+                String next = scanner.nextLine();
+                if (next.equals("")) {
+                    ok = true;
+                    System.out.println("Exiting");
+                } else {
+                    input = Integer.parseInt(next);
+                    ok = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("\nInvalid input, must be a number.");
+                ok = false;
+            }
+        }
+        return input;
+    }
+
     // Get user input - date
     private Date getDate(String question) {
         Date input = null;
@@ -108,8 +132,8 @@ public class ConsoleCallback {
                 System.out.println("Exiting");
                 ok = true;
             } else {
-                if (next.equals("Y") || next.equals("N")) {
-                    input = next.equals("Y");
+                if (next.equalsIgnoreCase("Y") || next.equalsIgnoreCase("N")) {
+                    input = next.equalsIgnoreCase("Y");
                     ok = true;
                 } else {
                     System.out.println("Must be Y or N");
@@ -337,6 +361,7 @@ public class ConsoleCallback {
         if (choice == 0) {
             System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString()));
             programStructureActions(selectedStudent.getProgramStructure().getResults());
+            selectedStudentActions();
         } else if (choice == 1) {
             filterStructure();
         } else if (choice == 2) {
@@ -360,19 +385,15 @@ public class ConsoleCallback {
             if (filterChoice == 0) {
                 System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_COURSE)));
                 programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_COURSE));
-                return;
             } else if (filterChoice == 1) {
                 System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_EXEMPTION)));
                 programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_EXEMPTION));
-                return;
             } else if (filterChoice == 2) {
                 System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_INTERNSHIP)));
                 programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_INTERNSHIP));
-                return;
             } else if (filterChoice == 3) {
                 System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(ProgramStructure.FILTER_TRANSFER)));
                 programStructureActions(selectedStudent.getProgramStructure().getResults(ProgramStructure.FILTER_TRANSFER));
-                return;
             }
             selectedStudentActions();
         } else if (choice == 1) {
@@ -384,6 +405,7 @@ public class ConsoleCallback {
 
             System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(storage.getUser(staff_id))));
             programStructureActions(selectedStudent.getProgramStructure().getResults(storage.getUser(staff_id)));
+            selectedStudentActions();
         } else if (choice == 2) {
             System.out.println("Not sure how we want to handle this");
             selectedStudentActions();
@@ -393,7 +415,27 @@ public class ConsoleCallback {
     }
 
     private void programStructureActions(List<AbstractCategory> results) {
-        
+        if (results.size() > 0) {
+            Boolean viewComments = getBoolean("View comments on a category?");
+            if (viewComments != null && viewComments) {
+                Integer index = getNumber("Enter number of category to choose");
+                if (index == null) {
+                    return;
+                } else if (index - 1 < 0 || index - 1 > results.size()) {
+                    System.out.println("Number not valid");
+                    return;
+                }
+
+                System.out.println(results.get(index - 1).getComments());
+                Boolean addComments = getBoolean("Add a comment?");
+                if (addComments != null && addComments) {
+                    String newComment = getInput("Enter your comment");
+                    if (newComment != null) {
+                        results.get(index - 1).addComment(new Comment(newComment, currentUser));
+                    }
+                }
+            }
+        }
     }
 
     private void editStudent() {
