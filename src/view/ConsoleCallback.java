@@ -445,8 +445,58 @@ public class ConsoleCallback {
             selectedStudent.getProgramStructure().addCategory(newTransfer);
             editStudent();
         } else if (choice == 3) {
-            System.out.println("Internship object not defined yet...");
-            editStudent();
+            // Internship
+            Boolean hasInternship = getBoolean("Has the student got an internship?");
+            if (hasInternship == null) {
+                editStudent();
+                return;
+            } else if (hasInternship) {
+                String company = getInput("Company");
+                if (company == null) {
+                    editStudent();
+                    return;
+                }
+
+                Date startDate = getDate("Start date");
+                if (startDate == null) {
+                    editStudent();
+                    return;
+                }
+
+                Date endDate = null;
+
+                Boolean isCompleted = getBoolean("Internship completed?");
+                if (isCompleted == null) {
+                    editStudent();
+                    return;
+                } else if (isCompleted) {
+                    endDate = getDate("End date");
+                    if (endDate == null) {
+                        editStudent();
+                        return;
+                    }
+                }
+
+                String contactPerson = getInput("Contact person");
+                if (contactPerson == null) {
+                    editStudent();
+                    return;
+                }
+
+                Internship newInternship = new Internship(company, startDate, isCompleted, endDate, contactPerson);
+                selectedStudent.getProgramStructure().addCategory(newInternship);
+                editStudent();
+            } else {
+                String advice = getInput("Advice given");
+                if (advice == null) {
+                    editStudent();
+                    return;
+                }
+
+                Internship newInternship = new Internship(advice, currentUser);
+                selectedStudent.getProgramStructure().addCategory(newInternship);
+                editStudent();
+            }
         } else if (choice == 4) {
             System.out.println("\n" + selectedStudent.toString());
             selectedStudentActions();

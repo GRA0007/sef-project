@@ -24,8 +24,6 @@ public class Course extends AbstractCategory {
         this.coordinator = coordinator;
         this.prerequisites = prerequisites;
         this.isExemption = isExemption;
-        
-        
     }
 
     @Override
@@ -34,8 +32,7 @@ public class Course extends AbstractCategory {
             long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
             long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
-            String duration = diff + " months";
-            return duration;
+            return diff + " months";
         } else {
             return "N/A";
         }
@@ -55,7 +52,7 @@ public class Course extends AbstractCategory {
         if (prerequisites != null) {
             StringBuilder prerequisitesString = new StringBuilder();
             for (Course prerequisite : prerequisites) {
-                prerequisitesString.append(prerequisite.getCourseCode()).append(": ").append(prerequisite.getCourseName()).append("\n");
+                prerequisitesString.append(prerequisite.getCourseCode()).append(": ").append(prerequisite.getCourseName());
             }
             return prerequisitesString.toString();
         } else {
