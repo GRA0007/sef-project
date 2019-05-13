@@ -6,27 +6,41 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public abstract class AbstractCategory implements CategoryInt {
+public abstract class AbstractCategory implements CategoryInt
+{
 
-    private List<Comment> commentList = new ArrayList<>();
 
-    public abstract String toString();
+	private List<Comment> commentList = new ArrayList<>();
 
-    public abstract String getDuration();
+	protected Staff staff;
+	
+	public abstract String toString();
 
-    public void addComment(Comment comment){
+	public abstract String getDuration();
 
-        commentList.add(comment);
-    }
+	public void addComment(Comment comment)
+	{
 
-    public String getComments(){
+		commentList.add(comment);
+	}
 
-        String commentListString = "";
+	public String getComments()
+	{
 
-        for (Comment currentComment:
-             commentList) {
-            commentListString += currentComment.toString() + "\n";
-        }
-        return commentListString;
-    }
+		StringBuilder commentListString = new StringBuilder();
+
+		if (commentList.size() > 0) {
+			for (Comment currentComment : commentList) {
+				commentListString.append(currentComment.toString()).append("\n");
+			}
+		} else {
+			commentListString.append("No comments\n");
+		}
+
+		return commentListString.toString();
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
 }

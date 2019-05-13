@@ -12,11 +12,11 @@ import static org.junit.Assert.*;
 
 public class CommentTest {
 
-    private Comment comment1;
-    private Date currentDate = new Date( );
-    private int authority  = 1;
-    private String comment  = "This is a dummaz comment to test the bloody testing class";
-    private Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", false);
+    Comment comment1;
+    Date currentDate = new Date( );
+    int authority  = 1;
+    String comment  = "This is a dummaz comment to test the bloody testing class";
+    Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", 0);
 
     public static void main(String[] args){
 
@@ -24,6 +24,9 @@ public class CommentTest {
 
     @Before
     public void setUp() throws Exception {
+
+        SimpleDateFormat ft =
+                new SimpleDateFormat ("yyyy.MM.dd");
 
         comment1 = new Comment(comment,author);
     }
@@ -34,7 +37,7 @@ public class CommentTest {
 
     @Test
     public void editAuthor() {
-        Staff notMilroy = new Staff("e1234","Not","Milroy", "", "", "", "", "", false);
+        Staff notMilroy = new Staff("e1234","Not","Milroy", "", "", "", "", "", 0);
         comment1.setAuthor(notMilroy);
         assertEquals(notMilroy, comment1.getAuthor());
         System.out.println("\nNew auth name: " + comment1.getAuthor());

@@ -7,9 +7,10 @@ public class Student extends AbstractUser
 	private int riskLevel;
 	private String riskReasonAndAdvice;
 
-	Student(String userID, String famName, String givenName, String address,
+	public Student(String userID, String famName, String givenName, String address,
 				   String phoneNo, String email) {
 		super(userID, famName, givenName, address, phoneNo, email);
+		structure = new ProgramStructure();
 	}
 
 	public ProgramStructure getProgramStructure() {
