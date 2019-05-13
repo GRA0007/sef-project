@@ -15,8 +15,8 @@ public class CourseTest {
     private Date currentDate = new Date();
     private Date endDate = new Date();
 
-    private Staff coordinator = new Staff("E99999", "Kodz", "Milroy", "", "", "e9999@rmit.edu.au","Comp Sci", "Coordinator", true);
-    private Course prereq = new Course("COSC 2018", "Discrete Mathematics", "Semster_1_2018", coordinator,  currentDate, true, endDate, false);
+    private Staff coordinator = new Staff("E99999", "Kodz", "Milroy", "", "", "e9999@rmit.edu.au","Comp Sci", "Coordinator", 1);
+    private Course prereq = new Course("COSC 2018", "Discrete Mathematics", coordinator,  currentDate, true, endDate, false);
 
     private Course[] prereqArray= {prereq};
 
@@ -26,7 +26,7 @@ public class CourseTest {
 
     @Before
     public void setUp() throws Exception{
-        course1 = new Course("COSC 2019", "Algorithms and Analysis", "Semester_1_2019",coordinator, prereqArray, currentDate, false, endDate,false);
+        course1 = new Course("COSC 2019", "Algorithms and Analysis",coordinator, prereqArray, currentDate, false, endDate,false);
     }
     @Test
     public void getDuration() {

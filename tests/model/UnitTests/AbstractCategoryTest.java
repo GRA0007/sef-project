@@ -17,7 +17,7 @@ public class AbstractCategoryTest {
     private String commentString1  = "This is a dummaz comment to test the bloody testing class";
     private String commentString2  = "Second comment being tested . . .  TESTIINNGG!";
 
-    Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", false);
+    Staff author = new Staff("e1234","Milroy","da sokk", "", "", "", "", "", 1);
     List<Comment> commentList = new ArrayList<>();
 
     @Before
