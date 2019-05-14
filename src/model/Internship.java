@@ -6,10 +6,7 @@ import java.util.Date;
 
 public class Internship extends AbstractCategory
 {
-	private String company; 
-	private Date startDate;
-	private boolean completed;
-	private Date endDate;
+	private String company;
 	private String contactPerson;
 	
 	private boolean gainedInternship = false;
@@ -26,7 +23,7 @@ public class Internship extends AbstractCategory
 	{
 		this.company = company;
 		this.startDate = startDate;
-		this.completed = completed;
+		this.isCompleted = completed;
 		this.endDate = endDate;
 		this.contactPerson = contactPerson;
 		this.staff = staff;
@@ -78,11 +75,6 @@ public class Internship extends AbstractCategory
 	{
 		return company;
 	}
-
-	@Override
-    public String getDuration() {
-        return null;
-    }
     
     @Override
     public String toString() 

@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommentTest {
 
@@ -29,7 +29,7 @@ public class CommentTest {
         SimpleDateFormat ft =
                 new SimpleDateFormat ("yyyy.MM.dd");
 
-        comment1 = new Comment(comment,author);
+        comment1 = new Comment(comment,author,currentDate);
     }
 
     @After

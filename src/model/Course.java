@@ -7,9 +7,6 @@ public class Course extends AbstractCategory {
 
     private String courseCode;
     private String courseName;
-    private Date startDate;
-    private Date endDate;
-    private boolean isCompleted = false;
     private String completedOrNot = "";
     private Course[] prerequisites;
     private boolean isExemption;
@@ -23,18 +20,6 @@ public class Course extends AbstractCategory {
         this.staff = coordinator;
         this.prerequisites = prerequisites;
         this.isExemption = isExemption;
-    }
-
-    @Override
-    public String getDuration() {
-        if (isCompleted) {
-            long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
-            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-
-            return diff + " months";
-        } else {
-            return "N/A";
-        }
     }
 
 

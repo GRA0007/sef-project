@@ -1,17 +1,13 @@
 package model.UnitTests;
 
-import static org.junit.Assert.*;
-
-import java.time.LocalDate;
-import java.util.Date;
-
+import model.Internship;
 import model.Staff;
+import model.Student;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.Internship;
-import model.Student;
+import java.time.LocalDate;
 
 public class InternshipTest
 {
