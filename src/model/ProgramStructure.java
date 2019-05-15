@@ -12,6 +12,7 @@ public class ProgramStructure implements ProgramStructureInt {
     public static final int FILTER_EXEMPTION = 1;
     public static final int FILTER_INTERNSHIP = 2;
     public static final int FILTER_TRANSFER = 3;
+    public static final int FILTER_STUDENTFEEDBACK = 4;
 
     private String name;
     private List<AbstractCategory> categories = new ArrayList<>();
@@ -72,6 +73,9 @@ public class ProgramStructure implements ProgramStructureInt {
         } else if (filter == FILTER_TRANSFER) {
             return getString(categories.stream()
                     .filter(category -> category instanceof Transfer).collect(Collectors.toList()));
+        } else if (filter == FILTER_STUDENTFEEDBACK) {
+            return getString(categories.stream()
+                    .filter(category -> category instanceof StudentFeedback).collect(Collectors.toList()));
         }
 
         return null;
@@ -99,6 +103,9 @@ public class ProgramStructure implements ProgramStructureInt {
         } else if (filter == FILTER_TRANSFER) {
             return categories.stream()
                     .filter(category -> category instanceof Transfer).collect(Collectors.toList());
+        } else if (filter == FILTER_STUDENTFEEDBACK) {
+            return categories.stream()
+                    .filter(category -> category instanceof StudentFeedback).collect(Collectors.toList());
         }
 
         return null;

@@ -18,7 +18,7 @@ public class Internship extends AbstractCategory
 		if (staff == null)
 			throw new NullPointerException("Staff must be included");
 		// They don't have an internship yet, add advice given as a comment
-		this.addComment(new Comment(advice, staff));
+		this.addComment(new Comment("Advice Given; " + advice, staff));
 
 		this.staff = staff;
 		gainedInternship = false;
@@ -43,6 +43,11 @@ public class Internship extends AbstractCategory
 		this.gainedInternship = true;
 	}
 
+	public String getAdvice()
+	{
+		return this.getComments();
+	}
+	
 	public void setGainedInternship(boolean set)
 	{
 		this.gainedInternship = set;
@@ -116,11 +121,12 @@ public class Internship extends AbstractCategory
 	{
 
 		if (!gainedInternship)
-			return String.format("\n%s\t%s\n%s\t\t%s", "Internship Status: ",
-					this.intershipStatus ? "Completed" : "Active", "Advice Given: ", "See comments");
+			return String.format("\n%-30s%s\n%s", "Internship Status: ",
+					this.intershipStatus ? "Completed" : "Active", getComments());
 
-		return String.format("\nCompany:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n",
-				this.company, this.startDate, this.endDate, this.contactPerson);
+		return String.format("\n%-30s%s\n%-30s%s\n%-30s%s\n%-30s%s",
+				"Company:", this.company, "Start Date:", this.startDate, 
+				"End Date:", this.endDate, "Contact Person:", this.contactPerson);
 	}
 
 }
