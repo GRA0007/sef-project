@@ -82,6 +82,11 @@ public abstract class AbstractUser implements UserInt
 			return this.address;
 		}
 
+		public String getEmail()
+	{
+		return this.email;
+	}
+
 		@Override
 		public String toString() {
 			return String.format("ID: %s\nName: %s %s\nAddress: %s\nPhone number: %s\nEmail: %s",

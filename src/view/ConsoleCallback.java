@@ -430,7 +430,24 @@ public class ConsoleCallback {
                 if (addComments != null && addComments) {
                     String newComment = getInput("Enter your comment");
                     if (newComment != null) {
-                        results.get(index - 1).addComment(new Comment(newComment, currentUser));
+                        Comment newCommentToAdd = new Comment(newComment, currentUser);
+                        results.get(index - 1).addComment(newCommentToAdd);
+
+                        Boolean sendComment = getBoolean("Would you like to send the comment to the student?");
+                        String email = getInput("Please enter your email address or DEFAULT if you wish to use the existing email address:");
+                        //TODO: Validation
+                        if(email.equalsIgnoreCase("DEFAULT")){
+                            email = currentUser.getEmail();
+                        }
+                        String password = getInput("Password:");
+                        if(sendComment != null && sendComment){
+                            boolean sentEmail = selectedStudent.sendCommentEmail(newCommentToAdd,email, password);
+                            if(sentEmail){
+                                System.out.println("Email has been successfully sent to " + selectedStudent.getName());
+                            }
+                        }else{
+                            return;
+                        }
                     }
                 }
             }
