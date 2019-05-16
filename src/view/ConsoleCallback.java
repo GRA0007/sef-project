@@ -454,6 +454,12 @@ public class ConsoleCallback {
                 return;
             }
 
+            String semester = getInput("Semester");
+            if (semester== null) {
+                editStudent();
+                return;
+            }
+
             String[] prerequisitesString = null;
             Course[] prerequisites = null;
             Boolean hasPrerequisites = getBoolean("Are there any prerequisites?");
@@ -488,7 +494,7 @@ public class ConsoleCallback {
                 }
             }
 
-            Course newCourse = new Course(courseCode, courseName, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
+            Course newCourse = new Course(courseCode, courseName, semester, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
             selectedStudent.getProgramStructure().addCategory(newCourse);
             editStudent();
         } else if (choice == 2) {
