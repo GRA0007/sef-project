@@ -36,7 +36,7 @@ public class Student extends AbstractUser
 		return this.riskReasonAndAdvice;
 	}
 
-	public boolean sendCommentEmail(Comment comment, String emailFromUser, String password) {
+	public boolean sendCommentEmail(Comment comment, String emailFromUser, String password) throws Exception {
 	    //String studentEmail = this.getEmail();
         String studentEmail = "s3719834@student.rmit.edu.au";
         String staffEmail = emailFromUser;
@@ -64,7 +64,7 @@ public class Student extends AbstractUser
                     InternetAddress.parse(studentEmail));
 
             // Set Subject: header field
-            message.setSubject("Summary of your recent interation with " + comment.getAuthor().getName());
+            message.setSubject("Summary of your recent interaction with " + comment.getAuthor().getName());
 
             // Now set the actual message
             message.setText(comment.toString());

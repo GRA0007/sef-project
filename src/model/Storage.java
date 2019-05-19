@@ -20,7 +20,7 @@ public class Storage implements StorageInt {
         staff.add(testStaff2);
 
         Student testStudent = new Student("s1234", "Stark", "Samantha", "10 Street, Suburb", "5555555555", "s1234@student.rmit.edu.au");
-        testStudent.getProgramStructure().addCategory(new Course("CYX123", "Software Engineering Fundamentals", testStaff1, null, new Date(), false, null, false));
+        testStudent.getProgramStructure().addCategory(new Course("CYX123", "Software Engineering Fundamentals", "1", testStaff1, null, new Date(), false, null, false));
         testStudent.setRiskLevel(2);
         students.add(testStudent);
 
