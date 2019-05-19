@@ -7,6 +7,7 @@ public class Course extends AbstractCategory {
 
     private String courseCode;
     private String courseName;
+    private String semester;
     private Date startDate;
     private Date endDate;
     private boolean isCompleted = false;
@@ -14,9 +15,12 @@ public class Course extends AbstractCategory {
     private Course[] prerequisites;
     private boolean isExemption;
 
+    //Add if fail or pass
+    //Add an int for the risk one here
     public Course(String courseCode, String courseName, Staff coordinator, Course[] prerequisites, Date startDate, boolean isCompleted, Date endDate, boolean isExemption) {
         this.courseCode = courseCode;
         this.courseName = courseName;
+        this.semester = semester;
         this.startDate = startDate;
         this.endDate = endDate;
         this.isCompleted = isCompleted;
@@ -24,6 +28,18 @@ public class Course extends AbstractCategory {
         this.prerequisites = prerequisites;
         this.isExemption = isExemption;
     }
+
+    public Course(String courseCode, String courseName,Staff coordinator, Date startDate, boolean isCompleted, Date endDate, boolean isExemption) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.semester = semester;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isCompleted = isCompleted;
+        this.staff = coordinator;
+        this.isExemption = isExemption;
+    }
+
 
     @Override
     public String getDuration() {
@@ -59,6 +75,9 @@ public class Course extends AbstractCategory {
         }
     }
 
+    public String getSemester(){
+        return this.semester;
+    }
 
     public boolean getExemption()
     {
@@ -74,6 +93,7 @@ public class Course extends AbstractCategory {
         toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", this.staff.getName());
         toString = String.format("%s\n%-30s%s", toString, "Prerequisites:", this.getPrerequisites());
         toString = String.format("%s\n%-30s%s", toString, "Course duration:", this.getDuration());
+        toString = String.format("%s\n%-30s%s", toString, "Semester:", this.getSemester());
 
         if (isCompleted) {
             completedOrNot = "Completed";
