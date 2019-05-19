@@ -55,11 +55,6 @@ public class CommentTest {
     }
 
     @Test
-    public void getDate() {
-        assertEquals(currentDate, comment1.getDate());
-    }
-
-    @Test
     public void checkToString() {
         System.out.println(comment1.toString());
     }

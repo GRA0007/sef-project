@@ -430,7 +430,25 @@ public class ConsoleCallback {
                 if (addComments != null && addComments) {
                     String newComment = getInput("Enter your comment");
                     if (newComment != null) {
-                        results.get(index - 1).addComment(new Comment(newComment, currentUser));
+                        Comment newCommentToAdd = new Comment(newComment, currentUser);
+                        results.get(index - 1).addComment(newCommentToAdd);
+
+                        Boolean sendComment = getBoolean("Would you like to send the comment to the student?");
+
+                        if(sendComment != null && sendComment){
+                            String email = getInput("Please enter your email address or DEFAULT if you wish to use the existing email address");
+                            //TODO: Validation
+                            if(email.equalsIgnoreCase("DEFAULT")){
+                                email = currentUser.getEmail();
+                            }
+                            String password = getInput("Password");
+                            boolean sentEmail = selectedStudent.sendCommentEmail(newCommentToAdd,email, password);
+                            if(sentEmail){
+                                System.out.println("Email has been successfully sent to " + selectedStudent.getName());
+                            }
+                        }else{
+                            return;
+                        }
                     }
                 }
             }
@@ -450,6 +468,12 @@ public class ConsoleCallback {
 
             String courseName = getInput("Course name");
             if (courseName == null) {
+                editStudent();
+                return;
+            }
+
+            String semester = getInput("Semester");
+            if (semester== null) {
                 editStudent();
                 return;
             }
@@ -488,7 +512,7 @@ public class ConsoleCallback {
                 }
             }
 
-            Course newCourse = new Course(courseCode, courseName, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
+            Course newCourse = new Course(courseCode, courseName, semester, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
             selectedStudent.getProgramStructure().addCategory(newCourse);
             editStudent();
         } else if (choice == 2) {
