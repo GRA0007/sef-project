@@ -5,6 +5,7 @@ import model.interfaces.StorageInt;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Storage implements StorageInt {
 
@@ -19,7 +20,8 @@ public class Storage implements StorageInt {
         staff.add(testStaff2);
 
         Student testStudent = new Student("s1234", "Stark", "Samantha", "10 Street, Suburb", "5555555555", "s1234@student.rmit.edu.au");
-        testStudent.getProgramStructure().addCategory(new Course("CYX123", "Software Engineering Fundamentals","Semester 1", testStaff1, null, new Date(), false, null, false));
+        testStudent.getProgramStructure().addCategory(new Course("CYX123", "Software Engineering Fundamentals", testStaff1, null, new Date(), false, null, false));
+        testStudent.setRiskLevel(2);
         students.add(testStudent);
 
         System.out.println("Test data loaded");
@@ -66,5 +68,12 @@ public class Storage implements StorageInt {
         Student newStudent = new Student(id, family, given, address, phone, id + "@student.rmit.edu.au");
         students.add(newStudent);
         return newStudent;
+    }
+
+    // Return list of at risk students
+    public List<Student> getAtRiskStudents() {
+        return students.stream()
+                .filter(student -> student.getRiskLevel() > 0)
+                .collect(Collectors.toList());
     }
 }

@@ -13,7 +13,11 @@ public abstract class AbstractCategory implements CategoryInt
 	private List<Comment> commentList = new ArrayList<>();
 
 	protected Staff staff;
-	
+	protected Date startDate;
+	protected boolean isCompleted;
+	protected Date endDate;
+	protected Date lastEditTimestamp = new Date();
+
 	public abstract String toString();
 
 	public abstract String getDuration();
@@ -42,5 +46,9 @@ public abstract class AbstractCategory implements CategoryInt
 
 	public Staff getStaff() {
 		return staff;
+	}
+
+	public void updateTimestamp() {
+		lastEditTimestamp = new Date();
 	}
 }

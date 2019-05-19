@@ -7,7 +7,6 @@ import javax.mail.internet.*;
 public class Student extends AbstractUser
 {
 	private ProgramStructure structure;
-	private int progress;
 	private int riskLevel;
 	private String riskReasonAndAdvice;
 
@@ -19,14 +18,6 @@ public class Student extends AbstractUser
 
 	public ProgramStructure getProgramStructure() {
 		return structure;
-	}
-
-	public void setInternshipProgress(int progress){
-		this.progress = progress;
-	}
-
-	public int getProgress(){
-		return progress;
 	}
 
 	public void setRiskLevel(int riskLevel){
@@ -88,4 +79,15 @@ public class Student extends AbstractUser
         }
     }
 
+	@Override
+	public String toString() {
+		if (riskLevel > 0) {
+			return String.format("ID: %s\nName: %s %s\nAddress: %s\nPhone number: %s\nEmail: %s\n" +
+							"\nThis student is at risk.\nRisk level: %s\nReason/advice: %s",
+					this.userID, this.givenName, this.famName, this.address, this.phoneNo, this.email,
+					riskLevel, riskReasonAndAdvice);
+		} else {
+			return super.toString();
+		}
+	}
 }

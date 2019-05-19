@@ -277,7 +277,7 @@ public class ConsoleCallback {
     }
 
     private void studentActions() {
-        String[] options = new String[] {"View student", "Create student", "Log out", "Quit"};
+        String[] options = new String[] {"View student", "Create student", "View list of at risk students", "Log out", "Quit"};
         int choice = getChoice(options);
         if (choice == 0) {
             // Select student
@@ -296,6 +296,19 @@ public class ConsoleCallback {
                 System.out.println("You don't have authority to create students.");
             }
         } else if (choice == 2) {
+            List<Student> students = storage.getAtRiskStudents();
+            System.out.println("List of at risk students:\n");
+            System.out.println("Risk | Student id | Student name");
+            System.out.println("---------------------------------------------");
+            int i = 0;
+            for (Student student : students) {
+                System.out.println(String.format("%-4s | %-10s | %s", student.getRiskLevel(), student.getID(), student.getName()));
+                i++;
+            }
+            System.out.println("---------------------------------------------");
+            mainMenu();
+            return;
+        } else if (choice == 3) {
             currentUser = null;
             System.out.println("Logging out");
             mainMenu();
@@ -376,7 +389,7 @@ public class ConsoleCallback {
     }
 
     private void filterStructure() {
-        String[] options = new String[] {"Filter by category (course, internship, etc.)", "Filter by staff member", "Filter by date & time", "Cancel"};
+        String[] options = new String[] {"Filter by category (course, internship, etc.)", "Filter by staff member", "Cancel"};
         int choice = getChoice(options);
         if (choice == 0) {
             String[] filters = new String[] {"Courses", "Exemptions", "Internships", "Transfers", "Back"};
@@ -404,9 +417,6 @@ public class ConsoleCallback {
 
             System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(storage.getUser(staff_id))));
             programStructureActions(selectedStudent.getProgramStructure().getResults(storage.getUser(staff_id)));
-            selectedStudentActions();
-        } else if (choice == 2) {
-            System.out.println("Not sure how we want to handle this");
             selectedStudentActions();
         } else {
             selectedStudentActions();
@@ -449,6 +459,7 @@ public class ConsoleCallback {
                         }else{
                             return;
                         }
+                        results.get(index - 1).updateTimestamp();
                     }
                 }
             }

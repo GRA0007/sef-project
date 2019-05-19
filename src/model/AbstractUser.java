@@ -13,12 +13,12 @@ import model.interfaces.UserInt;
  */
 public abstract class AbstractUser implements UserInt
 {
-		private String userID;
-		private String famName;
-		private String givenName;
-		private String address;
-		private String phoneNo;
-		private String email;
+		String userID;
+		String famName;
+		String givenName;
+		String address;
+		String phoneNo;
+		String email;
 		
 		AbstractUser(String userID, String famName, String givenName, String address,
 				String phoneNo, String email) {
