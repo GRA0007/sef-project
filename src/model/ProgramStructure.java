@@ -13,7 +13,6 @@ public class ProgramStructure implements ProgramStructureInt {
     public static final int FILTER_INTERNSHIP = 2;
     public static final int FILTER_TRANSFER = 3;
 
-    private String name;
     private List<AbstractCategory> categories = new ArrayList<>();
 
     public void addCategory(AbstractCategory structure) {
@@ -35,6 +34,10 @@ public class ProgramStructure implements ProgramStructureInt {
 
     public void deleteCategory(AbstractCategory category) {
         categories.remove(category);
+    }
+
+    public List<AbstractCategory> getCategories() {
+        return categories;
     }
 
     public String getString(List<AbstractCategory> categories) {

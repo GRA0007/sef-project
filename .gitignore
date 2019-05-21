@@ -28,3 +28,4 @@ hs_err_pid*
 .idea/misc.xml
 /bin/
 .DS_Store
+data.json

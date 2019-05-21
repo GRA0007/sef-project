@@ -17,6 +17,7 @@ public abstract class AbstractCategory implements CategoryInt
 	protected Date startDate;
 	protected boolean isCompleted;
 	protected Date endDate;
+	protected Date lastEditTimestamp = new Date();
 
 	public abstract String toString();
 
@@ -34,7 +35,6 @@ public abstract class AbstractCategory implements CategoryInt
 
 	public void addComment(Comment comment)
 	{
-
 		commentList.add(comment);
 	}
 
@@ -54,7 +54,19 @@ public abstract class AbstractCategory implements CategoryInt
 		return commentListString.toString();
 	}
 
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
 	public Staff getStaff() {
 		return staff;
+	}
+
+	public void updateTimestamp() {
+		lastEditTimestamp = new Date();
+	}
+
+	public void setTimestamp(Date date) {
+		lastEditTimestamp = date;
 	}
 }
