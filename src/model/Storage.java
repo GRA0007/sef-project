@@ -18,15 +18,31 @@ public class Storage implements StorageInt {
     public void loadData(boolean test) {
         if (test) {
             Staff testStaff1 = new Staff("e94145", "Kodikara", "Milindi", "10 Street, Suburb", "5555555555", "milindi.kodikara@rmit.edu.au", "Software Engineering", "Sessional Tutor", 0);
-            Staff testStaff2 = new Staff("e12345", "Thevethayan", "Charles", "10 Street, Suburb", "5555555555", "charles.thevethayan@rmit.edu.au", "Software Engineering", "Lecturer", 3);
+            Staff testStaff2 = new Staff("e12345", "Thevathayan", "Charles", "10 Street, Suburb", "5555555555", "charles.thevathayan@rmit.edu.au", "Software Engineering", "Lecturer", 3);
             staff.add(testStaff1);
             staff.add(testStaff2);
 
-            Student testStudent = new Student("s1234", "Stark", "Samantha", "10 Street, Suburb", "5555555555", "s1234@student.rmit.edu.au");
-            testStudent.getProgramStructure().addCategory(new Course("ABC123", "Software Engineering Fundamentals", "1", testStaff1, null, new Date(), false, null, false));
-            testStudent.setRiskLevel(2);
-            testStudent.setRiskReasonAndAdvice("Example advice");
+            Course sef = new Course("ISYS1118", "Software Engineering Fundamentals", "1", testStaff2, null, new Date(), false, null, false);
+
+            Student testStudent = new Student("s3667779", "Kodikara", "Milindi", "10 Street, Suburb", "5555555555", "s3667779@student.rmit.edu.au");
+            testStudent.getProgramStructure().addCategory(sef);
+            testStudent.setRiskLevel(3);
+            testStudent.setRiskReasonAndAdvice("Risky student");
             students.add(testStudent);
+
+            Student testStudent2 = new Student("s3721631", "Pandey", "Ruchita", "10 Street, Suburb", "5555555555", "s3721631@student.rmit.edu.au");
+            testStudent2.getProgramStructure().addCategory(sef);
+            students.add(testStudent2);
+
+            Student testStudent3 = new Student("s3718570", "Grant", "Benjamin", "10 Street, Suburb", "5555555555", "s3718570@student.rmit.edu.au");
+            testStudent3.getProgramStructure().addCategory(sef);
+            students.add(testStudent3);
+
+            Student testStudent4 = new Student("s3747749", "Ellis", "Andrew", "10 Street, Suburb", "5555555555", "s3747749@student.rmit.edu.au");
+            testStudent4.getProgramStructure().addCategory(sef);
+            testStudent4.setRiskLevel(2);
+            testStudent4.setRiskReasonAndAdvice("Failed 3 courses");
+            students.add(testStudent4);
 
             System.out.println("Test data loaded");
         } else {
@@ -72,7 +88,9 @@ public class Storage implements StorageInt {
                                 studentsJSON.getJSONObject(i).getString("email")
                         );
                         s.setRiskLevel(studentsJSON.getJSONObject(i).getInt("riskLevel"));
-                        s.setRiskReasonAndAdvice(studentsJSON.getJSONObject(i).getString("riskReason"));
+                        if (studentsJSON.getJSONObject(i).getInt("riskLevel") > 0) {
+                            s.setRiskReasonAndAdvice(studentsJSON.getJSONObject(i).getString("riskReason"));
+                        }
 
                         // Structure
                         JSONObject structureJSON = studentsJSON.getJSONObject(i).getJSONObject("structure");
@@ -173,6 +191,12 @@ public class Storage implements StorageInt {
                 System.out.println("No data loaded");
             }
         }
+    }
+
+    public void clearData() {
+        staff = new ArrayList<>();
+        students = new ArrayList<>();
+        System.out.println("Data cleared");
     }
 
     // Store the data in the database

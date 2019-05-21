@@ -10,6 +10,7 @@ public interface StorageInt {
 
     void loadData(boolean test);
     boolean saveData();
+    void clearData();
 
     Staff authUser(String staffId, String pass);
     Staff addUser(String staffId, String given, String family, String address,

@@ -162,14 +162,20 @@ public class ConsoleCallback {
     }
 
     private void mainMenu() {
-        String[] options = new String[] {"Login", "Sign up", "Quit"};
+        String[] options = new String[] {"Login", "Sign up", "Quit", "[TEST] Load test data", "[TEST] Clear all data"};
         int choice = getChoice(options);
         if (choice == 0) {
             login();
         } else if (choice == 1) {
             signup();
-        } else {
+        } else if (choice == 2) {
             quit();
+        } else if (choice == 3) {
+            storage.loadData(true);
+            mainMenu();
+        } else if (choice == 4) {
+            storage.clearData();
+            mainMenu();
         }
     }
 
