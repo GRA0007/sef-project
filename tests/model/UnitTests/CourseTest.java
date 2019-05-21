@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class CourseTest {
 
@@ -18,7 +19,7 @@ public class CourseTest {
     private Staff coordinator = new Staff("E99999", "Kodz", "Milroy", "", "", "e9999@rmit.edu.au","Comp Sci", "Coordinator", 1);
     private Course prereq = new Course("COSC 2018", "Discrete Mathematics", "Semester 1", coordinator,  currentDate, true, endDate, false);
 
-    private Course[] prereqArray= {prereq};
+    private String[] prereqArray= {prereq.getCourseCode()};
 
     public static void main(String[] args){
 
@@ -45,7 +46,7 @@ public class CourseTest {
 
     @Test
     public void getExemption() {
-        assertEquals(false, course1.getExemption());
+        assertFalse(course1.getExemption());
     }
 
     @Test
@@ -55,7 +56,7 @@ public class CourseTest {
         toString = String.format("%s\n%-30s%s", toString, "Course code:", "COSC 2019");
         toString = String.format("%s\n%-30s%s", toString, "Course name:", "Algorithms and Analysis");
         toString = String.format("%s\n%-30s%s", toString, "Course coordinator:", coordinator.getName());
-        toString = String.format("%s\n%-30s%s", toString, "Prerequisites:", prereqArray[0].getCourseCode()+":"+ prereqArray[0].getCourseName());
+        toString = String.format("%s\n%-30s%s", toString, "Prerequisites:", prereqArray[0]);
         toString = String.format("%s\n%-30s%s", toString, "Course duration:", "N/A");
         toString = String.format("%s\n%-30s%s", toString, "Semester:", "Semester 1");
         toString = String.format("%s\n%-30s%s", toString, "Status:", "Pending");

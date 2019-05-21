@@ -6,9 +6,6 @@ public class Transfer extends AbstractCategory {
 
     private String fromProgram;
     private String toProgram;
-    private Date startDate;
-    private Date endDate;
-    private boolean isTransferred;
 
 
     public Transfer(String fromProgram, String toProgram, Date startDate, boolean isTransferred, Date endDate, Staff staff) {
@@ -16,7 +13,7 @@ public class Transfer extends AbstractCategory {
         this.toProgram = toProgram;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.isTransferred= isTransferred;
+        this.isCompleted = isTransferred;
         this.staff = staff;
     }
 
@@ -33,7 +30,7 @@ public class Transfer extends AbstractCategory {
     }
 
     public boolean isTransferred(){
-        return this.isTransferred;
+        return this.isCompleted;
     }
 
     @Override
@@ -46,7 +43,7 @@ public class Transfer extends AbstractCategory {
 
 
         String transferredOrNot = "";
-        if (isTransferred) {
+        if (isCompleted) {
             transferredOrNot = "Transferred";
         } else {
             transferredOrNot = "Not Transferred";

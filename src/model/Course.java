@@ -8,16 +8,12 @@ public class Course extends AbstractCategory {
     private String courseCode;
     private String courseName;
     private String semester;
-    private Date startDate;
-    private Date endDate;
-    private boolean isCompleted = false;
-    private String completedOrNot = "";
-    private Course[] prerequisites;
+    private String[] prerequisites;
     private boolean isExemption;
 
     //Add if fail or pass
     //Add an int for the risk one here
-    public Course(String courseCode, String courseName, String semester, Staff coordinator, Course[] prerequisites, Date startDate, boolean isCompleted, Date endDate, boolean isExemption) {
+    public Course(String courseCode, String courseName, String semester, Staff coordinator, String[] prerequisites, Date startDate, boolean isCompleted, Date endDate, boolean isExemption) {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.semester = semester;
@@ -66,13 +62,17 @@ public class Course extends AbstractCategory {
 
         if (prerequisites != null) {
             StringBuilder prerequisitesString = new StringBuilder();
-            for (Course prerequisite : prerequisites) {
-                prerequisitesString.append(prerequisite.getCourseCode()).append(":").append(prerequisite.getCourseName());
+            for (String prerequisite : prerequisites) {
+                prerequisitesString.append(prerequisite);
             }
             return prerequisitesString.toString();
         } else {
             return "None";
         }
+    }
+
+    public String[] getPrerequisiteArray() {
+        return prerequisites;
     }
 
     public String getSemester(){
@@ -95,12 +95,13 @@ public class Course extends AbstractCategory {
         toString = String.format("%s\n%-30s%s", toString, "Course duration:", this.getDuration());
         toString = String.format("%s\n%-30s%s", toString, "Semester:", this.getSemester());
 
+        String completedOrNot;
         if (isCompleted) {
             completedOrNot = "Completed";
         } else {
             completedOrNot = "Pending";
         }
-        toString = String.format("%s\n%-30s%s", toString, "Status:", this.completedOrNot);
+        toString = String.format("%s\n%-30s%s", toString, "Status:", completedOrNot);
 
         return toString;
     }

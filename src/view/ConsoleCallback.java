@@ -156,20 +156,26 @@ public class ConsoleCallback {
                 "     ########         ########         ########    \n");
         System.out.println("\n                    Welcome to SSS");
         System.out.println("Loading data...");
-        storage.loadData();
+        storage.loadData(false);
         System.out.println();
         mainMenu();
     }
 
     private void mainMenu() {
-        String[] options = new String[] {"Login", "Sign up", "Quit"};
+        String[] options = new String[] {"Login", "Sign up", "Quit", "[TEST] Load test data", "[TEST] Clear all data"};
         int choice = getChoice(options);
         if (choice == 0) {
             login();
         } else if (choice == 1) {
             signup();
-        } else {
+        } else if (choice == 2) {
             quit();
+        } else if (choice == 3) {
+            storage.loadData(true);
+            mainMenu();
+        } else if (choice == 4) {
+            storage.clearData();
+            mainMenu();
         }
     }
 
@@ -189,7 +195,6 @@ public class ConsoleCallback {
             mainMenu();
             return;
         }
-        //TODO: validity checking
         String pass = getInput("Password");
         if (pass == null) {
             mainMenu();
@@ -215,7 +220,6 @@ public class ConsoleCallback {
             mainMenu();
             return;
         }
-        //TODO: validity checking
 
         String given = getInput("Given name");
         if (given == null) {
@@ -277,7 +281,7 @@ public class ConsoleCallback {
     }
 
     private void studentActions() {
-        String[] options = new String[] {"View student", "Create student", "Log out", "Quit"};
+        String[] options = new String[] {"View student", "Create student", "View list of at risk students", "Log out", "Quit"};
         int choice = getChoice(options);
         if (choice == 0) {
             // Select student
@@ -296,6 +300,36 @@ public class ConsoleCallback {
                 System.out.println("You don't have authority to create students.");
             }
         } else if (choice == 2) {
+            List<Student> students = storage.getAtRiskStudents();
+            System.out.println("List of at risk students:\n");
+            System.out.println("#  | Risk | Student id | Student name");
+            System.out.println("-------------------------------------------------");
+            int i = 0;
+            for (Student student : students) {
+                System.out.println(String.format("%-2s | %-4s | %-10s | %s", i+1, student.getRiskLevel(), student.getID(), student.getName()));
+                i++;
+            }
+            System.out.println("-------------------------------------------------\n");
+
+            if (students.size() > 0) {
+                Boolean selectStudent = getBoolean("Select a student?");
+                if (selectStudent != null && selectStudent) {
+                    Integer index = getNumber("Enter number from the list above");
+                    if (index == null) {
+                        studentActions();
+                        return;
+                    } else if (index - 1 < 0 || index - 1 > students.size()) {
+                        System.out.println("Number not valid");
+                        studentActions();
+                        return;
+                    }
+                    selectedStudent = students.get(index - 1);
+                }
+            } else {
+                studentActions();
+                return;
+            }
+        } else if (choice == 3) {
             currentUser = null;
             System.out.println("Logging out");
             mainMenu();
@@ -322,7 +356,6 @@ public class ConsoleCallback {
             studentActions();
             return;
         }
-        //TODO: validity check
 
         String studentGiven = getInput("Student given name");
         if (studentGiven == null) {
@@ -355,7 +388,7 @@ public class ConsoleCallback {
 
     private void selectedStudentActions() {
         // Viewing student
-        String[] options = new String[] {"View program structure", "Filter program structure", "Edit program structure", "Close student"};
+        String[] options = new String[] {"View program structure", "Filter program structure", "Edit program structure", "Edit \"at risk\" status", "Close student"};
         int choice = getChoice(options);
         if (choice == 0) {
             System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString()));
@@ -371,12 +404,14 @@ public class ConsoleCallback {
                 selectedStudentActions();
             }
         } else if (choice == 3) {
+            editAtRisk();
+        } else if (choice == 4) {
             studentActions();
         }
     }
 
     private void filterStructure() {
-        String[] options = new String[] {"Filter by category (course, internship, etc.)", "Filter by staff member", "Filter by date & time", "Cancel"};
+        String[] options = new String[] {"Filter by category (course, internship, etc.)", "Filter by staff member", "Cancel"};
         int choice = getChoice(options);
         if (choice == 0) {
             String[] filters = new String[] {"Courses", "Exemptions", "Internships", "Transfers", "Back"};
@@ -404,9 +439,6 @@ public class ConsoleCallback {
 
             System.out.println(String.valueOf(selectedStudent.getProgramStructure().toString(storage.getUser(staff_id))));
             programStructureActions(selectedStudent.getProgramStructure().getResults(storage.getUser(staff_id)));
-            selectedStudentActions();
-        } else if (choice == 2) {
-            System.out.println("Not sure how we want to handle this");
             selectedStudentActions();
         } else {
             selectedStudentActions();
@@ -442,17 +474,48 @@ public class ConsoleCallback {
                                 email = currentUser.getEmail();
                             }
                             String password = getInput("Password");
-                            boolean sentEmail = selectedStudent.sendCommentEmail(newCommentToAdd,email, password);
-                            if(sentEmail){
-                                System.out.println("Email has been successfully sent to " + selectedStudent.getName());
+                            try {
+                                boolean sentEmail = selectedStudent.sendCommentEmail(newCommentToAdd, email, password);
+                                if (sentEmail) {
+                                    System.out.println("Email has been successfully sent to " + selectedStudent.getName());
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Email failed to send: " + e.toString());
                             }
                         }else{
                             return;
                         }
+                        results.get(index - 1).updateTimestamp();
                     }
                 }
             }
         }
+    }
+
+    private void editAtRisk() {
+        System.out.println("The selected student is" + (selectedStudent.getRiskLevel() > 0 ? " " : " not ") + "currently at risk");
+        Boolean edit = getBoolean("Would you like to change their status?");
+        if (edit != null && edit) {
+            Integer riskLevel = getNumber("Risk level (0 for not at risk)");
+            if (riskLevel == null) {
+                selectedStudentActions();
+                return;
+            }
+
+            String riskReason = null;
+            if (riskLevel > 0) {
+                riskReason = getInput("Reason/advice given");
+                if (riskReason == null) {
+                    selectedStudentActions();
+                    return;
+                }
+            }
+
+            selectedStudent.setRiskLevel(riskLevel);
+            selectedStudent.setRiskReasonAndAdvice(riskReason);
+            System.out.println("Risk level saved");
+        }
+        selectedStudentActions();
     }
 
     private void editStudent() {
@@ -479,17 +542,12 @@ public class ConsoleCallback {
             }
 
             String[] prerequisitesString = null;
-            Course[] prerequisites = null;
             Boolean hasPrerequisites = getBoolean("Are there any prerequisites?");
             if (hasPrerequisites == null) {
                 editStudent();
                 return;
             } else if (hasPrerequisites) {
                 prerequisitesString = getList("Prerequisites course codes");
-                prerequisites = new Course[prerequisitesString.length];
-                for (int i = 0; i < prerequisitesString.length; i++) {
-                    prerequisites[i] = selectedStudent.getProgramStructure().getCourseByCode(prerequisitesString[i]);
-                }
             }
 
             Date startDate = getDate("Start date");
@@ -512,7 +570,7 @@ public class ConsoleCallback {
                 }
             }
 
-            Course newCourse = new Course(courseCode, courseName, semester, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
+            Course newCourse = new Course(courseCode, courseName, semester, currentUser, prerequisitesString, startDate, isCompleted, endDate, choice == 1);
             selectedStudent.getProgramStructure().addCategory(newCourse);
             editStudent();
         } else if (choice == 2) {
