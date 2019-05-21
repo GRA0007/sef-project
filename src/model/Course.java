@@ -49,7 +49,6 @@ public class Course extends AbstractCategory {
         }
     }
 
-
     public String getCourseCode() {
         return courseCode;
     }

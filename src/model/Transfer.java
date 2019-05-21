@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class Transfer extends AbstractCategory {
 
@@ -33,6 +34,10 @@ public class Transfer extends AbstractCategory {
         return this.isCompleted;
     }
 
+    public Date getEndDate() {
+        return this.endDate;
+    }
+
     @Override
     public String toString() {
         String toString = "";
@@ -50,10 +55,6 @@ public class Transfer extends AbstractCategory {
         }
         toString = String.format("%s\n%-30s%s", toString, "Status:", transferredOrNot);
         return toString;
-    }
-
-    public String getDuration() {
-        return null;
     }
 }
 

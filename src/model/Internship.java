@@ -102,18 +102,11 @@ public class Internship extends AbstractCategory
 	public String getCompany()
 	{
 		return company;
-	}
-
-	@Override
-	public String getDuration()
-	{
-		return null;
-	}
-
-	@Override
-	public String toString()
-	{
-
+  }
+    
+    @Override
+    public String toString() 
+    {
 		if (!gainedInternship)
 			return String.format("\n%s\t%s\n%s\t\t%s", "Internship Status: ",
 					this.isCompleted ? "Completed" : "Active", "Advice Given: ", "See comments");

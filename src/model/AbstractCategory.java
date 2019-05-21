@@ -5,6 +5,7 @@ import model.interfaces.CategoryInt;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractCategory implements CategoryInt
 {
@@ -20,7 +21,17 @@ public abstract class AbstractCategory implements CategoryInt
 
 	public abstract String toString();
 
-	public abstract String getDuration();
+	public String getDuration() {
+		if (isCompleted) {
+			long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+			long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+
+			int months = Math.round(diff / 30);
+			return months + " month" + (months == 1 ? "" : "s");
+		} else {
+			return "N/A";
+		}
+	};
 
 	public void addComment(Comment comment)
 	{
