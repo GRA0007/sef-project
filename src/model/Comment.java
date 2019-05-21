@@ -10,6 +10,12 @@ public class Comment implements CommentInt
     private Staff author;
     private Date date;
 
+    public Comment(String comment, Staff author, Date date) {
+        this.comment = comment;
+        this.author = author;
+        this.date = date;
+    }
+
     public Comment(String comment, Staff author) {
         this.comment = comment;
         this.author = author;

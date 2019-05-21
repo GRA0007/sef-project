@@ -8,7 +8,7 @@ import java.util.List;
 public interface StorageInt {
     // This class stores/retrieves user objects from the database and stores all staff and student objects
 
-    void loadData();
+    void loadData(boolean test);
     boolean saveData();
 
     Staff authUser(String staffId, String pass);

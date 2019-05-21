@@ -39,16 +39,15 @@ public class Student extends AbstractUser
 	public boolean sendCommentEmail(Comment comment, String emailFromUser, String password) throws Exception {
 	    //String studentEmail = this.getEmail();
         String studentEmail = "s3719834@student.rmit.edu.au";
-        String staffEmail = emailFromUser;
 
-        Properties props = new Properties();
+		Properties props = new Properties();
 
         props.put("mail.smtp.auth", true);
         props.put("mail.smtp.starttls.enable", true);
         props.put("mail.smtp.host", "smtp.office365.com");
 
         // Get the Session object.
-        SimpleMailAuthenticator authenticator = new SimpleMailAuthenticator(staffEmail, password);
+        SimpleMailAuthenticator authenticator = new SimpleMailAuthenticator(emailFromUser, password);
         Session session = Session.getInstance(props, authenticator);
 
 
@@ -57,7 +56,7 @@ public class Student extends AbstractUser
             Message message = new MimeMessage(session);
 
             // Set From: header field of the header.
-            message.setFrom(new InternetAddress(staffEmail));
+            message.setFrom(new InternetAddress(emailFromUser));
 
             // Set To: header field of the header.
             message.setRecipients(Message.RecipientType.TO,

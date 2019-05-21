@@ -5,9 +5,6 @@ import java.util.Date;
 public class Internship extends AbstractCategory
 {
 	private String company;
-	private Date startDate;
-	private boolean intershipStatus;
-	private Date endDate;
 	private String contactPerson;
 	private String completedSignature; // Staff member who authorised completion
 
@@ -18,7 +15,9 @@ public class Internship extends AbstractCategory
 		if (staff == null)
 			throw new NullPointerException("Staff must be included");
 		// They don't have an internship yet, add advice given as a comment
-		this.addComment(new Comment(advice, staff));
+		if (advice != null) {
+			this.addComment(new Comment(advice, staff));
+		}
 
 		this.staff = staff;
 		gainedInternship = false;
@@ -35,7 +34,7 @@ public class Internship extends AbstractCategory
 
 		this.company = company;
 		this.startDate = startDate;
-		this.intershipStatus = intershipStatus;
+		this.isCompleted = intershipStatus;
 		this.endDate = endDate;
 		this.contactPerson = contactPerson;
 		this.staff = staff;
@@ -75,13 +74,13 @@ public class Internship extends AbstractCategory
 
 	public boolean getInternshipStatus()
 	{
-		return this.intershipStatus;
+		return this.isCompleted;
 	}
 
 	@SuppressWarnings("deprecation")
 	public void setInternshipCompleted(Staff staff)
 	{
-		this.intershipStatus = true;
+		this.isCompleted = true;
 		this.completedSignature = staff.getID() + ": " + new Date().toGMTString().toString();
 	}
 
@@ -117,7 +116,7 @@ public class Internship extends AbstractCategory
 
 		if (!gainedInternship)
 			return String.format("\n%s\t%s\n%s\t\t%s", "Internship Status: ",
-					this.intershipStatus ? "Completed" : "Active", "Advice Given: ", "See comments");
+					this.isCompleted ? "Completed" : "Active", "Advice Given: ", "See comments");
 
 		return String.format("\nCompany:\t\t%s\nStart Date:\t\t%s\nEnd Date;\t\t%s\nContact Person\t\t%s\n",
 				this.company, this.startDate, this.endDate, this.contactPerson);

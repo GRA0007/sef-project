@@ -156,7 +156,7 @@ public class ConsoleCallback {
                 "     ########         ########         ########    \n");
         System.out.println("\n                    Welcome to SSS");
         System.out.println("Loading data...");
-        storage.loadData();
+        storage.loadData(false);
         System.out.println();
         mainMenu();
     }
@@ -536,17 +536,12 @@ public class ConsoleCallback {
             }
 
             String[] prerequisitesString = null;
-            Course[] prerequisites = null;
             Boolean hasPrerequisites = getBoolean("Are there any prerequisites?");
             if (hasPrerequisites == null) {
                 editStudent();
                 return;
             } else if (hasPrerequisites) {
                 prerequisitesString = getList("Prerequisites course codes");
-                prerequisites = new Course[prerequisitesString.length];
-                for (int i = 0; i < prerequisitesString.length; i++) {
-                    prerequisites[i] = selectedStudent.getProgramStructure().getCourseByCode(prerequisitesString[i]);
-                }
             }
 
             Date startDate = getDate("Start date");
@@ -569,7 +564,7 @@ public class ConsoleCallback {
                 }
             }
 
-            Course newCourse = new Course(courseCode, courseName, semester, currentUser, prerequisites, startDate, isCompleted, endDate, choice == 1);
+            Course newCourse = new Course(courseCode, courseName, semester, currentUser, prerequisitesString, startDate, isCompleted, endDate, choice == 1);
             selectedStudent.getProgramStructure().addCategory(newCourse);
             editStudent();
         } else if (choice == 2) {

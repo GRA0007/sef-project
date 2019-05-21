@@ -36,6 +36,10 @@ public class Staff extends AbstractUser
 	{
 		return department;
 	}
+	public String getStaffTitle()
+	{
+		return staffTitle;
+	}
 
 	@Override
 	public String toString()
