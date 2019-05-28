@@ -665,7 +665,7 @@ public class ConsoleCallback {
         } else if (choice == 4) {
             // Load structure
             System.out.println("Choose a predefined program structure to load");
-            String[] courses = new String[] {"Bachelor of Software Engineering"};
+            String[] courses = new String[] {"Bachelor of Software Engineering", "Cancel"};
             int course = getChoice(courses);
             if (course == 0) {
                 // Staff
@@ -717,6 +717,8 @@ public class ConsoleCallback {
                 selectedStudent.getProgramStructure().addCategory(new Course("ISYS1084", "Object Oriented Software Design", "1", lawrenceCavedon, d, false, null, false));
                 selectedStudent.getProgramStructure().addCategory(new Course("COSC2410", "Software Engineering Project", "2", bartiMurugesan, d, false, null, false));
 
+                editStudent();
+            } else {
                 editStudent();
             }
         } else if (choice == 5) {
