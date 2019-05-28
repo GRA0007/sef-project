@@ -22,12 +22,6 @@ public class Comment implements CommentInt
         this.date = new Date();
     }
 
-    public Comment(String comment, Staff author, Date date) {
-        this.comment = comment;
-        this.author = author;
-        this.date = date;
-    }
-
     public void setAuthor(Staff author){
         this.author = author;
     }

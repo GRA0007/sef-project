@@ -519,7 +519,7 @@ public class ConsoleCallback {
     }
 
     private void editStudent() {
-        String[] options = new String[] {"Add course", "Add exemption", "Add transfer", "Add internship", "Exit edit mode"};
+        String[] options = new String[] {"Add course", "Add exemption", "Add transfer", "Add internship", "Load predefined structure", "Exit edit mode"};
         int choice = getChoice(options);
         if (choice == 0 || choice == 1) {
             // Course/Exemption
@@ -663,6 +663,65 @@ public class ConsoleCallback {
                 editStudent();
             }
         } else if (choice == 4) {
+            // Load structure
+            System.out.println("Choose a predefined program structure to load");
+            String[] courses = new String[] {"Bachelor of Software Engineering", "Cancel"};
+            int course = getChoice(courses);
+            if (course == 0) {
+                // Staff
+                Staff jamesHarland = new Staff("e11111","Harland", "James","12 Address St, Suburb", "5555555555", "james.harland@rmit.edu.au", "SEH", "Assoc. Prof.", 2);
+                Staff philVines = new Staff("e11112","Vines", "Phil","12 Address St, Suburb", "5555555555", "phil.vines@rmit.edu.au", "SEH", "Dr", 2);
+                Staff shekharKalra = new Staff("e11113","Kalra", "Shekhar","12 Address St, Suburb", "5555555555", "shekhar.kalra@rmit.edu.au", "SEH", "", 2);
+                Staff floraSalim = new Staff("e11114","Salim", "Flora","12 Address St, Suburb", "5555555555", "flora.salim@rmit.edu.au", "SEH", "Dr", 2);
+                Staff ibrahimKhalil = new Staff("e11115","Khalil", "Ibrahim","12 Address St, Suburb", "5555555555", "ibrahim.khalil@rmit.edu.au", "SEH", "Assoc. Prof.", 2);
+                Staff casparRyan = new Staff("e11116","Ryan", "Caspar","12 Address St, Suburb", "5555555555", "caspar.ryan@rmit.edu.au", "SEH", "Dr", 2);
+                Staff jennyZhang = new Staff("e11117","Zhang", "Jenny","12 Address St, Suburb", "5555555555", "jenny.zhang@rmit.edu.au", "SEH", "Assoc. Prof.", 2);
+                Staff sebastianSardina = new Staff("e11118","Sardina", "Sebastian","12 Address St, Suburb", "5555555555", "sebastian.sardina@rmit.edu.au", "SEH", "Dr", 2);
+                Staff charlesThevathayan = new Staff("e11119","Thevathayan", "Charles","12 Address St, Suburb", "5555555555", "charles.thevathayan@rmit.edu.au", "SEH", "Dr", 2);
+                Staff timothyWiley = new Staff("e11121","Wiley", "Timothy","12 Address St, Suburb", "5555555555", "timothy.wiley@rmit.edu.au", "SEH", "Dr", 2);
+                Staff lawrenceCavedon = new Staff("e11122","Cavedon", "Lawrence","12 Address St, Suburb", "5555555555", "lawrence.cavedon@rmit.edu.au", "SEH", "Assoc. Prof.", 2);
+                Staff jeffreyChan = new Staff("e11123","Chan", "Jeffrey","12 Address St, Suburb", "5555555555", "jeffrey.chan@rmit.edu.au", "SEH", "Dr", 2);
+                Staff keDeng = new Staff("e11124","Deng", "Ke","12 Address St, Suburb", "5555555555", "ke.deng@rmit.edu.au", "SEH", "Dr", 2);
+                Staff margaretHamilton = new Staff("e11125","Hamilton", "Margaret","12 Address St, Suburb", "5555555555", "margaret.hamilton@rmit.edu.au", "SEH", "Assoc. Prof.", 2);
+                Staff bartiMurugesan = new Staff("e11126","Murugesan", "Barti","12 Address St, Suburb", "5555555555", "barti.murugesan@rmit.edu.au", "SEH", "", 2);
+                storage.addUsers(new Staff[] {
+                        jamesHarland, philVines, shekharKalra, floraSalim, ibrahimKhalil,
+                        casparRyan, jennyZhang, sebastianSardina, charlesThevathayan, timothyWiley,
+                        lawrenceCavedon, jeffreyChan, keDeng, margaretHamilton, bartiMurugesan
+                });
+                Date d = new Date();
+
+                // Year 1
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2627", "Discrete Structures in Computing", "1", jamesHarland, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2473", "Introduction to Computer Systems", "1", philVines, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC1284", "Programming Techniques", "1", shekharKalra, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2628", "User-centred Design", "1", floraSalim, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2536", "Security in Computing and Information Technology", "2", ibrahimKhalil, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2391", "Further Programming", "2", casparRyan, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("ISYS1057", "Database Concepts", "2", jennyZhang, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2758", "Further Web Programming", "2", charlesThevathayan, d, false, null, false));
+                // Year2
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC1107", "Computing Theory", "1", sebastianSardina, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("ISYS1118", "Software Engineering Fundamentals", "1", charlesThevathayan, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC1076", "Advanced Programming Techniques", "1", timothyWiley, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2299", "Software Engineering: Process and Tools", "1", lawrenceCavedon, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2123", "Algorithms and Analysis", "2", jeffreyChan, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC1114", "Operating Systems Principles", "2", keDeng, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC1147", "Professional Computing Practice", "2", margaretHamilton, d, false, null, false));
+                // Year3
+                selectedStudent.getProgramStructure().addCategory(new Internship("INTE2376: Approved Industry Experience 1", bartiMurugesan));
+                selectedStudent.getProgramStructure().addCategory(new Internship("INTE2377, Approved Industry Experience 2", bartiMurugesan));
+                selectedStudent.getProgramStructure().addCategory(new Course("INTE2374", "Software Engineering Principles and Practice 1", "", bartiMurugesan, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("INTE2375", "Software Engineering Principles and Practice 2", "", bartiMurugesan, d, false, null, false));
+                // Year 4
+                selectedStudent.getProgramStructure().addCategory(new Course("ISYS1084", "Object Oriented Software Design", "1", lawrenceCavedon, d, false, null, false));
+                selectedStudent.getProgramStructure().addCategory(new Course("COSC2410", "Software Engineering Project", "2", bartiMurugesan, d, false, null, false));
+
+                editStudent();
+            } else {
+                editStudent();
+            }
+        } else if (choice == 5) {
             System.out.println("\n" + selectedStudent.toString());
             selectedStudentActions();
         }
