@@ -312,6 +312,9 @@ public class Storage implements StorageInt {
         staff.add(newUser);
         return newUser;
     }
+    public void addUsers(Staff[] newUsers) {
+        staff.addAll(Arrays.asList(newUsers));
+    }
 
     // Get a staff member by id
     public Staff getUser(String staffId) {

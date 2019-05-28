@@ -15,6 +15,7 @@ public interface StorageInt {
     Staff authUser(String staffId, String pass);
     Staff addUser(String staffId, String given, String family, String address,
                   String phone, String department, String jobTitle, int authority, String pass);
+    void addUsers(Staff[] newUsers);
     Staff getUser(String staffId);
 
     Student getStudent(String id);
