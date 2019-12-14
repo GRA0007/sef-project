@@ -1,7 +1,3 @@
-# sef-project
-Software Engineering Fundamentals project
+# CRM for RMIT Staff Members
+A fully functioning Customer Relations Management System for Staff Members at RMIT University.
 
-Mili - 25%
-Andy - 25%
-Ben - 25%
-Ruchita - 25%
